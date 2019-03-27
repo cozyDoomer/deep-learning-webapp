@@ -1,10 +1,8 @@
 import os
-from flask import Flask, request, redirect, url_for, Blueprint, render_template
-from upload import upload
+from flask import Flask, request, redirect, url_for, Blueprint, render_template, send_from_directory
 
 from werkzeug.utils import secure_filename
 
-image_classifier = Blueprint('image_classifier', __name__)
 upload = Blueprint('upload', __name__)
 
 UPLOAD_FOLDER = './static/uploaded'
@@ -17,7 +15,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@image_classifier.route('/upload', methods=['GET', 'POST'])
+@upload.route('/upload', methods=['POST'])
 
 def upload_file():
     if request.method == 'POST':
@@ -34,11 +32,12 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('image_classifier.upload_file',
-                                    filename=filename))
-    return render_template("image-classifier.html")
+            return render_template("image-classifier.html", filename=filename) 
+        return 'upload error'
+    return 'api error'
 
-@image_classifier.route("/image-classifier")
-
-def show():
-    return render_template("image-classifier.html")
+@upload.route('/upload/<filename>', methods=['GET'])
+def send_file(filename):
+    if request.method=='GET':
+        return send_from_directory(UPLOAD_FOLDER, filename)
+    return 'api error'

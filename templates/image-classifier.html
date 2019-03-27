@@ -18,14 +18,16 @@
       <h3 class="center">IMAGE CLASSIFIER</h3>
       <p class="center"><em>Just choose a image to run it through the algorithm!</em></p>
 
-      <form class="center" action={{ url_for('image_classifier.upload_file') }} method="POST" enctype=multipart/form-data>
+      <form class="center" action="{{ url_for('upload.upload_file') }}" method="POST" enctype=multipart/form-data>
         <p><input type=file name=file>
            <input type=submit>
       </form>
 
-      <div class="center"> 
-        <img src="{{ url_for('static', filename = 'uploaded/1.png') }}" width="500" height="500">
-      </div>
+      {% if filename %}
+        <div class="center"> 
+          <img src="{{ url_for('upload.send_file', filename=filename) }}" width="500" height="500">
+        </div>
+      {% endif %}
 
     </div>
 
