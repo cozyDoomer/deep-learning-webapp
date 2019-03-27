@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 image_classifier = Blueprint('image_classifier', __name__)
 upload = Blueprint('upload', __name__)
 
-UPLOAD_FOLDER = '/static/uploaded'
+UPLOAD_FOLDER = './static/uploaded'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -33,20 +33,10 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            print(filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
+            return redirect(url_for('image_classifier.upload_file',
                                     filename=filename))
-    print('GET')
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-    '''
+    return render_template("image-classifier.html")
 
 @image_classifier.route("/image-classifier")
 
