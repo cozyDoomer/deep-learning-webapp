@@ -11,8 +11,6 @@
   <body>
     {% block content %}
 
-    
-
     <!-- Container (Contact Section) -->
     <div class="content container padding-64" id="contact">
       <h3 class="center">IMAGE CLASSIFIER</h3>
@@ -23,10 +21,27 @@
            <input type=submit>
       </form>
 
-      {% if filename %}
-        <div class="center"> 
-          <img src="{{ url_for('upload.send_file', filename=filename) }}" width="500" height="500">
-        </div>
+      {% if error %}
+      <p class="center"><em>Oops, there was an {{error}}</em></p>
+      {% endif %}
+
+      {% if filename %} 
+
+      {% if prediction %} 
+      <h3 class="center">{{prediction[0]}} with {{confidence[0]}}% confidence</h3>
+      <h4 class="center">{{prediction[1]}} with {{confidence[1]}}% confidence</h3>
+      <h4 class="center">{{prediction[2]}} with {{confidence[2]}}% confidence</h3>
+      {% endif %}
+
+      <div class="center padding-16">
+        <button class="button light-grey">
+          <a href="{{ url_for('image_classifier.analyze', filename=filename) }}" class="button">ANALYZE</a>
+        </button>
+      </div>
+
+      <div class="center">
+        <img src="{{ url_for('upload.send_file', filename=filename) }}" width="250">
+      </div>
       {% endif %}
 
     </div>
