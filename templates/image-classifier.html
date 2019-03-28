@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/css/template.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
   </head>
+  <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
   <body>
     {% block content %}
 
@@ -34,7 +36,7 @@
       {% endif %}
 
       <div class="center padding-16">
-        <button class="button light-grey">
+        <button class="button button center padding-large black xlarge wide animate-opacity">
           <a href="{{ url_for('image_classifier.analyze', filename=filename) }}" class="button">ANALYZE</a>
         </button>
       </div>
@@ -48,4 +50,15 @@
 
     {% endblock %}
   </body>
+
+  <!-- Footer -->
+  <footer class="footer black opacity hover-opacity-off center ">
+    <a href="{{ url_for('home') }}" class="button light-grey"><i class="fas fa-arrow-left margin-right"></i>Back to the Website</a>
+    <p>chr.unterrainer@gmail.com</p>
+    <p>I'm not on social media</p>
+    <a href="https://github.com/DollofCuty" class="button light-grey"><i class="fab fa-github fb"></i></a>
+    <a href="https://www.xing.com/profile/Christian_Unterrainer3/" class="button light-grey"><i class="fab fa-xing fb"></i></a>
+    <a href="https://angel.co/christian-unterrainer" class="button light-grey"><i class="fab fa-angellist fb"></i></a>
+    <a href="https://www.kaggle.com/dollofcuty" class="button light-grey"><i class="fab fa-kaggle fb"></i></a>
+  </footer>
 </html>

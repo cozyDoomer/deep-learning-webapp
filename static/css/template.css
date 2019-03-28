@@ -1737,3 +1737,13 @@ a {
 .border-pale-blue, .hover-border-pale-blue:hover {
     border-color: #e7ffff!important
 }
+
+.footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+ }
+
+.fb { 
+    transform: scale(2,2); 
+}
