@@ -8,8 +8,8 @@
   <!-- First Parallax Image with Logo Text -->
   <div class="bgimg-1 display-container opacity-min" id="home">
     <div class="display-middle" style="white-space:nowrap;">
-      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity">TRY DEEPLEARNING DEMO
-        <span class="hide-small"></span>
+      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity">TRY
+        <span class="hide-small"> DEEPLEARNING</span> DEMO
       </a>
     </div>
   </div>
@@ -28,7 +28,8 @@
       <!-- Hide this text on small devices -->
       <div class="col m6 hide-small padding-large">
           <p> This website is using Flask which is a micro web framework written in Python.</p>
-          <p> For the demo I intigrated a pytorch deep-learning model, <a href=https://arxiv.org/pdf/1712.00559.pdf>PNASNet-5</a> 
+          <p> For the demo I intigrated a <a href=https://github.com/pytorch/pytorch>pytorch</a> deep-learning model, 
+          <a href=https://arxiv.org/pdf/1712.00559.pdf>PNASNet-5</a> 
           from <a href=https://github.com/Cadene/pretrained-models.pytorch>this</a> great repository by Cadene.</p>
       </div>
     </div>
@@ -62,7 +63,7 @@
     <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
     <div class="row-padding center">
       <div class="col m3">
-        <img src="/static/images/training.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="data science image">
+        <img src="/static/images/training.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="Training Machine Learning Models">
       </div>
 
       <div class="col m3">
@@ -74,13 +75,13 @@
       </div>
 
       <div class="col m3">
-        <img src="/static/images/birb.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="experiments">
+        <img src="/static/images/birb.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="Experiments">
       </div>
     </div>
 
     <div class="row-padding center section">
       <button class="button padding-large light-grey" style="margin-top:64px">
-          <a href="{{ url_for('cv') }}" class="button">SHOW CV</a>
+          <a href="{{ url_for('cv') }}" class="button"><i class="fas fa-portrait fb margin-right"></i>SHOW CV</a>
       </button>
     </div>
   </div>
@@ -148,16 +149,6 @@
     document.getElementById("modal01").style.display = "block";
     var captionText = document.getElementById("caption");
     captionText.innerHTML = element.alt;
-  }
-
-  // Used to toggle the menu on small screens when clicking on the menu button
-  function toggleFunction() {
-      var x = document.getElementById("navDemo");
-      if (x.className.indexOf("show") == -1) {
-          x.className += " show";
-      } else {
-          x.className = x.className.replace(" show", "");
-      }
   }
   </script>
   {% endblock %}

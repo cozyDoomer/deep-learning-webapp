@@ -36,8 +36,6 @@ def analyze(filename):
 
     input = torch.autograd.Variable(tensor, requires_grad=False)
 
-    print(input.shape)
-
     # Load Imagenet Synsets
     with open(os.path.join(current_app.config['IMAGENET_FOLDER'], 'imagenet_synsets.txt'), 'r') as f:
         synsets = f.readlines()
