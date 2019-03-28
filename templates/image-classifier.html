@@ -7,7 +7,8 @@
     <!-- Container (Contact Section) -->
     <div class="content container padding-64" id="contact">
       <h3 class="center">IMAGE CLASSIFIER</h3>
-      <p class="center"><em>Just choose a image to run it through the algorithm!</em></p>
+      <p class="center"><em>Just choose an image to run inference on the <a href=https://arxiv.org/pdf/1712.00559.pdf>PNASNet-5</a> 
+        model trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
 
       <form class="center" action="{{ url_for('upload.upload_file') }}" method="POST" enctype=multipart/form-data>
         <p><input type=file name=file>
