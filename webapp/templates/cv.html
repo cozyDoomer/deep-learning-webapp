@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<title>Christian's cv</title>
+
+<style>
+  html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+  <body class="light-grey">
+
+  {% extends "template.html" %}
+  {% block content %}
+  <!-- Page Container -->
+  <div class="content margin-top" style="max-width:1400px;">
+
+    <!-- The Grid -->
+    <div class="row-padding">
+    
+      <!-- Left Column -->
+      <div class="third">
+      
+        <div class="white text-grey card-4">
+          <div class="display-container center">
+            <img src="/static/images/resized.jpg" class="margin-top-large" style="width:80%" alt="Avatar">
+            <div class="display-bottomleft container text-black"></div>
+            <h2>Christian Unterrainer</h2>
+          </div>
+          <div class="container">
+            <p><i class="fa fa-briefcase fa-fw margin-right large text-teal"></i>Software Developer, Data Scientist</p>
+            <p><i class="fa fa-home fa-fw margin-right large text-teal"></i>Austria, Wiener Neustadt</p>
+            <p></p><i class="fa fa-phone fa-fw margin-right large text-teal"></i> Phone: +43 660/1236463</p>
+            <p><i class="fa fa-envelope fa-fw margin-right large text-teal"></i>chr.unterrainer@gmail.com</p>
+            <!--<p><i class="fa fa-phone fa-fw margin-right large text-teal"></i>123456</p>-->
+            <hr>
+
+            <p class="large"><b><i class="fa fa-asterisk fa-fw margin-right text-teal"></i>Skills</b></p>
+            <p>Software Development</p>
+            <div class="light-grey round-xlarge small">
+              <div class="container center round-xlarge teal" style="width:70%">70%</div>
+            </div>
+            <p>Web Development</p>
+            <div class="light-grey round-xlarge small">
+              <div class="container center round-xlarge teal" style="width:55%">
+                <div class="center text-white">55%</div>
+              </div>
+            </div>
+            <p>Data Science</p>
+            <div class="light-grey round-xlarge small">
+              <div class="container center round-xlarge teal" style="width:80%">80%</div>
+            </div>
+            <br>
+            <p class="large"><b><i class="fas fa-cogs fa-fw margin-right text-teal"></i>Tech Stack</b></p>
+            <p></p>Python: fast.ai, Pytorch, Tensorflow, LightGBM, XGBoost, Flask</p>
+            <p>C#, C++, Java, Angular2, Typescript, HTML, CSS, SQL</p>
+            <p class="large"><b><i class="fas fa-microchip fa-fw margin-right text-teal"></i>Dev Ops</b></p>
+            <p></p>Visual Studio, IntelliJ, Jupyter-Notebooks, Anaconda, Google Cloud, Git, Github, Docker, Scrum</p>
+            
+            <p class="large text-theme"><b><i class="fa fa-globe fa-fw margin-right text-teal"></i>Languages</b></p>
+            <p>German</p>
+            <div class="light-grey round-xlarge">
+              <div class="round-xlarge teal" style="height:24px;width:100%"></div>
+            </div>
+            <p>English</p>
+            <div class="light-grey round-xlarge">
+              <div class="round-xlarge teal" style="height:24px;width:90%"></div>
+            </div>
+            <br>
+          </div>
+        </div><br>
+      <!-- End Left Column -->
+      </div>
+
+      <!-- Right Column -->
+      <div class="twothird">
+        <div class="container card white text-grey margin-bottom">
+          <h2 class="padding-16"><i class="fa fa-suitcase fa-fw margin-right xxlarge text-teal"></i>Work Experience</h2>
+          <div class="container">
+              <h5><b>Educating myself in the field of machine learning</b></h5>
+              <h6 class="text-teal"><i class="fa fa-calendar fa-fw margin-right"></i>Mar 2018 - <span class="tag teal round">present</span></h6>
+              <p>Through courses and Kaggle competitions.</p>
+              <hr class="divider" >
+            </div>
+          <div class="container">
+            <h5><b>Software Developer IoT at <a href="https://www.wittmann-group.com/">Wittmann Battenfeld</a></b></h5>
+            <h6 class="text-teal"><i class="fa fa-calendar fa-fw margin-right"></i>Feb 2019 - <span class="tag teal round">Apr 2019</span></h6>
+            <p>Software Developer on the B8 machine control unit using C# and Winforms.</p>
+            <hr class="divider" >
+          </div>
+          <div class="container">
+            <h5><b>Software Developer at <a href="https://www.gabriel-chemie.com/">Gabriel-Chemie</a></b></h5>
+            <h6 class="text-teal"><i class="fa fa-calendar fa-fw margin-right"></i>May 2018 - Sept 2018</h6>
+            <p> Engineering Database Software with Progress. </p><br>
+            <hr class="divider" >
+          </div>
+          <div class="container">
+            <h5><b>Web-Developer at <a href="http://www.atimis.at/">Atimis</a></b></h5>
+            <h6 class="text-teal"><i class="fa fa-calendar fa-fw margin-right"></i>Aug 2017 - Jan 2018</h6>
+            <p> Developing of a cloud based web application using Angular2, Typescript and HTML/CSS. </p><br>
+            <hr class="divider" >
+          </div>
+          <div class="container">
+            <h5><b>Internship at <a href="https://www.variotherm.com/">Variotherm Heating Systems</a></b></h5>
+            <h6 class="text-teal"><i class="fa fa-calendar fa-fw margin-right"></i>Jun 2014 - Aug 2014</h6>
+            <p> Software for dimensioning of their Systems. Continually developed until 2018, C# (Windows Forms). </p><br>
+          </div>
+        </div>
+
+        <div class="container card white text-grey">
+          <h2 class="padding-16"><i class="fa fa-certificate fa-fw margin-right xxlarge text-teal"></i>Education</h2>
+          <div class="container">
+            <h5><b><a href="https://www.kaggle.com/dollofcuty/">Kaggle</a> Competitions and Tutorials</b></h5>
+            <h6 class="text-teal"><i class="fa fa-calendar fa-fw margin-right"></i>Aug 2018 - present</h6>
+            <p>Learning of different Machine-Learning techniques. Building practical experience in the field with Python</p>
+            <hr class="divider" >
+          </div>
+          <div class="container">
+            <h5><b><a href="https://www.fast.ai/">fast.ai</a> Practical Deep Learning for Coders 2018 online course</b></h5>
+            <h6 class="text-teal"><i class="fa fa-calendar fa-fw margin-right"></i>Oct 2018 - Dec 2018</h6>
+            <p>Learning how to implement deep learning for structured and unstructured data</p>
+            <hr class="divider" >
+          </div>
+          <div class="container">
+            <h5><b>HTL Wiener Neustadt, Department EDVO</b></h5>
+            <h6 class="text-teal"><i class="fa fa-calendar fa-fw margin-right"></i>Oct 2011 - Jun 2016</h6>
+            <p>Developing of software applications; Working with database systems; Handling of software-engineering projects
+            <br>Thesis: Python vs C++ Benchmarking</p>
+            <hr class="divider" >
+          </div>
+          <div class="container">
+            <h5><b>BG Babenbergerring, academic high school</b></h5>
+            <h6 class="text-teal"><i class="fa fa-calendar fa-fw margin-right"></i>Oct 2007 - Sep 2011</h6>
+            <p>Languages: English, Latin; Basics in Math, Science und IT</p><br>
+          </div>
+        </div>
+
+      <!-- End Right Column -->
+      </div>
+    <!-- End Grid -->
+    </div>
+    <!-- End Page Container -->
+  </div>
+    
+  </body>
+  <!-- Footer -->
+  <footer class="container teal opacity hover-opacity-off center margin-top">
+    <a href="{{ url_for('download_cv', path=path) }}" class="button light-grey margin-top"><i class="fas fa-print margin-right"></i>Download as PDF</a>
+    <br>
+    <a href="{{ url_for('home') }}" class="button light-grey margin-top"><i class="fas fa-arrow-left margin-right"></i>Back to the Website</a>
+    <p>chr.unterrainer@gmail.com</p>
+    <a href="https://github.com/DollofCuty" class="button light-grey"><i class="fab fa-github fb"></i></a>
+    <a href="https://www.xing.com/profile/Christian_Unterrainer3/" class="button light-grey"><i class="fab fa-xing fb"></i></a>
+    <a href="https://angel.co/christian-unterrainer" class="button light-grey"><i class="fab fa-angellist fb"></i></a>
+    <a href="https://www.kaggle.com/dollofcuty" class="button light-grey"><i class="fab fa-kaggle fb"></i></a>
+  </footer>
+  {% endblock %}
+
+</html>
