@@ -1,6 +1,6 @@
 /virtual_env
-/instance
-/static/images
-/static/uploaded
-/static/models
-__pycache__
+webapp//instance
+webapp/static/images
+webapp/static/uploaded
+webapp/static/models
+webapp/__pycache__
