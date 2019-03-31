@@ -51,5 +51,5 @@ def download_cv():
 
 if __name__ == "__main__":
     install_secret_key(app)
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
     
