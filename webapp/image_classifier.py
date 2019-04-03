@@ -3,13 +3,13 @@
 import os
 from flask import Flask, Blueprint, current_app, render_template
 
-from skimage import io, transform
+#from skimage import io, transform
 
 import torch
 import numpy as np
 
-from pretrainedmodels import pnasnet5large
-import pretrainedmodels.utils as utils
+from pnasnet import pnasnet5large
+import utils
 
 image_classifier = Blueprint('image_classifier', __name__)
 
@@ -18,15 +18,14 @@ app = Flask(__name__)
 @image_classifier.route("/image-classifier")
 
 def show():
-    #print(inference())
     return render_template("image-classifier.html")
+
 
 @image_classifier.route("/image-classifier/<filename>")
 
 def analyze(filename):
     model = pnasnet5large(num_classes=1000, pretrained='imagenet')
     model.eval()
-
     # loading image uploaded to the server
     load_img = utils.LoadImage()
     # rescale, center crop, normalize, and others (ex: ToBGR, ToRange255)

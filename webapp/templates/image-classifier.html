@@ -4,11 +4,14 @@
     {% extends "template.html" %}
     {% block content %}
 
-    <!-- Container (Contact Section) -->
+    <!-- Container (IMAGE CLASSIFIER Section) -->
     <div class="content container padding-32" id="contact">
       <h3 class="center">IMAGE CLASSIFIER</h3>
-      <p class="center"><em>Just choose an image to run inference on the <a href=https://arxiv.org/pdf/1712.00559.pdf>PNASNet-5</a> 
+
+      <p class="center hide-small"><em>Just choose an image to run inference of the <a href=https://arxiv.org/pdf/1712.00559.pdf>PNASNet-5</a> 
         model trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
+
+      <p class="center hide-medium hide-large"><em>Just choose an image to run the model!</em></p>
 
       <form class="center" action="{{ url_for('upload.upload_file') }}" method="POST" enctype=multipart/form-data>
         <p><input type=file name=file>
@@ -28,7 +31,8 @@
         <h4>{{prediction[2]}} with {{confidence[2]}}% confidence</h4>
       </div>
       <div class="center hide-medium hide-large">
-        <h5 class="center">{{prediction[0]}} with {{confidence[0]}}% confidence</h5>
+        <h3>{{prediction[0]}} with {{confidence[0]}}% confidence</h3>
+        <h4>{{prediction[1]}} with {{confidence[1]}}% confidence</h4>
       </div>
       {% endif %}
 
@@ -45,11 +49,11 @@
       </div>
 
       <div class="center hide-small">
-        <img src="{{ url_for('upload.send_file', filename=filename) }}" height="300">
+        <img src="{{ url_for('upload.send_file', filename=filename) }}" class="image" style="max-height:300px">
       </div>
 
       <div class="center hide-medium hide-large">
-        <img src="{{ url_for('upload.send_file', filename=filename) }}" height="150">
+        <img src="{{ url_for('upload.send_file', filename=filename) }}" class="image" style="max-height:250px">
       </div>
       {% endif %}
 

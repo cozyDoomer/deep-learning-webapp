@@ -20,7 +20,7 @@
       
         <div class="white text-grey card-4">
           <div class="display-container center">
-            <img src="/static/images/resized.jpg" class="margin-top-large" style="width:80%" alt="Avatar">
+            <img src="/static/images/me.jpg" class="margin-top-large" style="width:80%" alt="Avatar">
             <div class="display-bottomleft container text-black"></div>
             <h2>Christian Unterrainer</h2>
           </div>
@@ -142,7 +142,7 @@
   </body>
   <!-- Footer -->
   <footer class="container teal opacity hover-opacity-off center margin-top">
-    <a href="{{ url_for('download_cv', path=path) }}" class="button light-grey margin-top"><i class="fas fa-print margin-right"></i>Download as PDF</a>
+    <a href="{{ url_for('cv.download', path=path) }}" class="button light-grey margin-top"><i class="fas fa-print margin-right"></i>Download as PDF</a>
     <br>
     <a href="{{ url_for('home') }}" class="button light-grey margin-top"><i class="fas fa-arrow-left margin-right"></i>Back to the Website</a>
     <p>chr.unterrainer@gmail.com</p>
