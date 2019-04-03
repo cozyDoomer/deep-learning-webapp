@@ -50,8 +50,4 @@ def home():
 
 if __name__ == "__main__":
     install_secret_key(app)
-<<<<<<< HEAD
-    app.run(debug=False host='0.0.0.0',port=5000)
-=======
     app.run(debug=False, host='0.0.0.0',port=5000)
->>>>>>> 4e6afbf... fixed merge

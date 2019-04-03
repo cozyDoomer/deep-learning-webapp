@@ -3,8 +3,6 @@
 import os
 from flask import Flask, Blueprint, current_app, render_template
 
-#from skimage import io, transform
-
 import torch
 import numpy as np
 
