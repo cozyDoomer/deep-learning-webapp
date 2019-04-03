@@ -1,22 +1,28 @@
 #!/venv/bin python
 
 import os, sys
-from flask import Flask, render_template, current_app, send_file, session
+from flask import Flask, render_template, current_app
+
 from image_classifier import image_classifier
 from upload import upload
+from cv import cv
+from email_service import email
 
 app = Flask(__name__)
 
 with app.app_context():
     UPLOAD_FOLDER = './static/uploaded'
     IMAGENET_FOLDER = './static/imagenet'
+    EMAIL = 'chr.unterrainer@gmail.com'
+                
     current_app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
-    current_app.config['IMAGENET_FOLDER'] = IMAGENET_FOLDER 
-
-app.config['SESSION_TYPE'] = 'filesystem'
+    current_app.config['IMAGENET_FOLDER'] = IMAGENET_FOLDER
+    current_app.config['EMAIL'] = EMAIL 
 
 app.register_blueprint(image_classifier)
 app.register_blueprint(upload)
+app.register_blueprint(cv)
+app.register_blueprint(email)
 
 def install_secret_key(app, filename='secret_key'):
     """Configure the SECRET_KEY from a file
@@ -28,7 +34,8 @@ def install_secret_key(app, filename='secret_key'):
     """
     filename = os.path.join(app.instance_path, filename)
     try:
-        app.config['SECRET_KEY'] = open(filename, 'rb').read()
+        app.secret_key = open(filename, 'rb').read()
+        app.config['SESSION_TYPE'] = 'filesystem'
         print('secret key found')
     except IOError:
         print('Error: No secret key. Create it with:')
@@ -41,15 +48,11 @@ def install_secret_key(app, filename='secret_key'):
 def home():
     return render_template("home.html")
 
-@app.route("/cv")
-def cv():
-    return render_template("cv.html")
-
-@app.route("/cv/download/")
-def download_cv():
-    return send_file('static/documents/cv_unterrainer.pdf', as_attachment=True)
-
 if __name__ == "__main__":
     install_secret_key(app)
+<<<<<<< HEAD
     app.run(debug=True, host='0.0.0.0')
     
+=======
+    app.run(host='0.0.0.0',port=5000)
+>>>>>>> 8b6150b

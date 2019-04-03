@@ -4,7 +4,7 @@
     <title>Christian's site</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/template.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -23,7 +23,7 @@
             <a href="{{ url_for('home') }}#contact" class="bar-item button hide-small"><i class="fa fa-envelope"></i> CONTACT</a>
             <div class="vertical-line hide-small" style="height: 45px;"></div>
             <a href="{{ url_for('image_classifier.show') }}" class="bar-item button hide-small"><i class="fas fa-laptop-code"></i> DEMO</a>
-            <a href="{{ url_for('cv') }}" class="bar-item button hide-small"><i class="fas fa-portrait"></i> CV</a>
+            <a href="{{ url_for('cv.show') }}" class="bar-item button hide-small"><i class="fas fa-portrait"></i> CV</a>
         </div>
     
         <!-- Navbar on small screens -->
@@ -33,7 +33,7 @@
             <a href="{{ url_for('home') }}#contact" class="bar-item button" onclick="toggleFunction()">CONTACT</a>
             <hr class="divider" >
             <a href="{{ url_for('image_classifier.show') }}" class="bar-item button" onclick="toggleFunction()">DEMO</a>
-            <a href="{{ url_for('cv') }}"  class="bar-item button" onclick="toggleFunction()">CV</a>
+            <a href="{{ url_for('cv.show') }}"  class="bar-item button" onclick="toggleFunction()">CV</a>
             <hr class="divider" >
         </div>
     </div>

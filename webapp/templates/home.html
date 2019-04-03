@@ -8,8 +8,8 @@
   <!-- First Parallax Image with Logo Text -->
   <div class="bgimg-1 display-container opacity-min" id="home">
     <div class="display-middle" style="white-space:nowrap;">
-      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity">TRY
-        <span class="hide-small"> DEEPLEARNING</span> DEMO
+      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity">
+        <span class="hide-small">TRY</span> IMAGE-CLASSIFIER
       </a>
     </div>
   </div>
@@ -22,10 +22,13 @@
     <div class="row">
       <div class="col m6 center padding-large">
         <p><b><i class="fa fa-user margin-right"></i>Christian Unterrainer</b></p><br>
+<<<<<<< HEAD
         <img src="/static/images/resized.jpg" class="round image" alt="Photo of Me" width="200">
+=======
+        <img src="/static/images/me.jpg" class="round image" alt="Photo of Me" width="200">
+>>>>>>> 8b6150b
       </div>
 
-      <!-- Hide this text on small devices -->
       <div class="col m6 padding-large">
           <p>I started out as software developer graduating from HTL Wiener Neustadt, mostly working with C# and Python.</p>
           <p>Over time I have gained experience in agile development, clean code guidelines and tools that help me 
@@ -70,25 +73,29 @@
     <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
     <div class="row-padding center">
       <div class="col m3">
-        <img src="/static/images/training.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="Training state of the art Machine Learning Models">
+        <img src="/static/images/work1.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="Training state of the art Machine Learning Models">
       </div>
 
       <div class="col m3">
+<<<<<<< HEAD
         <img src="/static/images/code.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="writing code for Kaggle Competitions">
+=======
+        <img src="/static/images/work2.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="writing code for Kaggle Competitions">
+>>>>>>> 8b6150b
       </div>
 
       <div class="col m3">
-        <img src="/static/images/plotting.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="visualizing/interpreting datasets">
+        <img src="/static/images/work3.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="visualizing/interpreting datasets">
       </div>
 
       <div class="col m3">
-        <img src="/static/images/birb.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="Experiments with deep-learning">
+        <img src="/static/images/work4.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="Experiments with deep-learning">
       </div>
     </div>
 
     <div class="row-padding center section">
       <button class="button padding-large light-grey" style="margin-top:64px">
-          <a href="{{ url_for('cv') }}" class="button"><i class="fas fa-portrait fb margin-right"></i>SHOW CV</a>
+          <a href="{{ url_for('cv.show') }}" class="button"><i class="fas fa-portrait fb margin-right"></i>SHOW CV</a>
       </button>
     </div>
   </div>
@@ -129,7 +136,8 @@
             <input class="input border" type="text" placeholder="Email" required name="Email">
           </div>
         </div>
-        <input class="input border" type="text" placeholder="Message" required name="Message">
+        <textarea maxlength="500" class="input border" placeholder="Message" required name="Message"></textarea>
+         
         <button class="button black right section" type="submit">
           <i class="fa fa-paper-plane"></i> SEND MESSAGE
         </button>
