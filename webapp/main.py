@@ -50,9 +50,4 @@ def home():
 
 if __name__ == "__main__":
     install_secret_key(app)
-<<<<<<< HEAD
-    app.run(debug=True, host='0.0.0.0')
-    
-=======
-    app.run(host='0.0.0.0',port=5000)
->>>>>>> 8b6150b
+    app.run(debug=False, host='0.0.0.0',port=5000)
