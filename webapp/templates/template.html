@@ -23,7 +23,7 @@
             <a href="{{ url_for('home') }}#contact" class="bar-item button hide-small"><i class="fa fa-envelope"></i> CONTACT</a>
             <div class="vertical-line hide-small" style="height: 45px;"></div>
             <a href="{{ url_for('image_classifier.show') }}" class="bar-item button hide-small"><i class="fas fa-laptop-code"></i> DEMO</a>
-            <a href="{{ url_for('cv') }}" class="bar-item button hide-small"><i class="fas fa-portrait"></i> CV</a>
+            <a href="{{ url_for('cv.show') }}" class="bar-item button hide-small"><i class="fas fa-portrait"></i> CV</a>
         </div>
     
         <!-- Navbar on small screens -->
@@ -33,7 +33,7 @@
             <a href="{{ url_for('home') }}#contact" class="bar-item button" onclick="toggleFunction()">CONTACT</a>
             <hr class="divider" >
             <a href="{{ url_for('image_classifier.show') }}" class="bar-item button" onclick="toggleFunction()">DEMO</a>
-            <a href="{{ url_for('cv') }}"  class="bar-item button" onclick="toggleFunction()">CV</a>
+            <a href="{{ url_for('cv.show') }}"  class="bar-item button" onclick="toggleFunction()">CV</a>
             <hr class="divider" >
         </div>
     </div>

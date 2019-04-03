@@ -1,4 +1,4 @@
-- make demo layout work on mobile 
-    - mostly done, some small phones are still looking bad
+- add flask-email to support the message feature in the frontend (in development)
 
 - upload to google cloud engine ?
+

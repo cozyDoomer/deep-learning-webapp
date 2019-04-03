@@ -15,19 +15,19 @@ body, html {
 
 /* First image (Logo. Full height) */
 .bgimg-1 {
-  background-image: url('/static/images/doggo.jpg');
+  background-image: url('/static/images/main1.jpg');
   min-height: 100%;
 }
 
 /* Second image (Portfolio) */
 .bgimg-2 {
-  background-image: url('/static/images/doggo2.jpg');
+  background-image: url('/static/images/main2.jpg');
   min-height: 400px;
 }
 
 /* Third image (Contact) */
 .bgimg-3 {
-  background-image: url('/static/images/garden.jpg');
+  background-image: url('/static/images/main3.jpg');
   min-height: 400px;
 }
 
@@ -1760,3 +1760,9 @@ a {
     margin: 0em;
     border-width: 2px;
 } 
+
+textarea {
+    width: 100px;
+    height: 120px;
+    resize: none;
+}
