@@ -18,9 +18,13 @@ COPY webapp webapp
 COPY boot.sh ./
 RUN chmod +x boot.sh
 
-#move the weights to pytorch directory
-RUN mkdir -p home/webapp/.torch 
-COPY webapp/static/weights/pnasnet5large.pth webapp/.torch/models/pnasnet5large-bf079911.pth 
+#download the weights for pnasnet5 from google drive
+RUN echo 'downloading image-classifier weights'
+RUN gdown https://drive.google.com/uc?id=1sifDhGShFfsLRr38gaC4NiodzW421QTv -O webapp/static/weights/pnasnet5large.pth
+
+# alternatively one can download the weights with the link above and put them 
+# to webapp/static/weights/pnasnet5large.pth in the repository and copy with this:
+#COPY webapp/static/weights/pnasnet5large.pth webapp/static/weights/pnasnet5large.pth
 
 ENV FLASK_APP webapp/main.py
 

@@ -5,11 +5,14 @@
   {% extends "template.html" %}
   {% block content %}
 
-  <!-- First Parallax Image with Logo Text -->
+  <!-- First Parallax Image with Button -->
   <div class="bgimg-1 display-container opacity-min" id="home">
     <div class="display-middle" style="white-space:nowrap;">
-      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity">
-        <span class="hide-small">TRY</span> IMAGE-CLASSIFIER
+      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity hide-small">
+        <span>TRY IMAGE-CLASSIFIER</span> 
+      </a>
+      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-small black xlarge wide animate-opacity hide-medium hide-large">
+        <span>IMAGE-CLASSIFIER</span> 
       </a>
     </div>
   </div>
@@ -35,7 +38,7 @@
     </div>
     <p class="large center padding-16">Im really good at:</p>
     <p class="wide"><i class="fa fa-laptop"></i>Software Development</p>
-    <div class="light-grey">
+    <div   class="light-grey">
       <div class="container padding-small dark-grey center" style="width:70%">70%</div>
     </div>
     <p class="wide"><i class="fa fa-tasks"></i>Web Development</p>
@@ -116,47 +119,55 @@
     <div class="row padding-32 section">
       <div class="large margin-bottom">
         <i class="fa fa-map-marker fa-fw hover-text-black xlarge margin-right"></i> Wiener Neustadt, Austria<br>
-        <i class="fa fa-envelope fa-fw hover-text-black xlarge margin-right"></i> Email: chr.unterrainer@gmail.com<br>
+        <i class="fa fa-envelope fa-fw hover-text-black xlarge margin-right"></i> Email: {{  mail  }}<br>
       </div>
       <p>Write me an e-mail or leave me a note:</p>
-      <form action="/action_page.php" target="_blank">
-        <div class="row-padding" style="margin:0 -16px 8px -16px">
+
+      {% from "_formhelpers.html" import render_field %}
+      <form action="{{ url_for('email.send', _anchor='contact') }}" method="POST">
+        <dl>
           <div class="half">
-            <input class="input border" type="text" placeholder="Name" required name="Name">
+            {{ render_field(form.name, class='input border', placeholder="Name") }}
           </div>
           <div class="half">
-            <input class="input border" type="text" placeholder="Email" required name="Email">
+            {{ render_field(form.email_field, class="input border", placeholder="Email Address") }}
+          </div>
+          <div class="row">
+            <div class="margin-top">
+              {{ render_field(form.message, class="input border", placeholder="Message") }}
+            </div>
+          </div> 
+        </dl>
+        <div class="row">
+          <div class="col m6 center padding-large">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="message_flash {{ category }} padding-large">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+          </div>
+          <div class="col m6 center padding-large">
+            <button class="button black right section" type="submit">
+              <i class="fa fa-paper-plane"></i> SEND MESSAGE
+            </button>
           </div>
         </div>
-        <textarea maxlength="500" class="input border" placeholder="Message" required name="Message"></textarea>
-         
-        <button class="button black right section" type="submit">
-          <i class="fa fa-paper-plane"></i> SEND MESSAGE
-        </button>
       </form>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="center black padding-64 opacity hover-opacity-decrease">
+  <footer class="center black padding-32 opacity hover-opacity-decrease">
     <a href="#home" class="button light-grey"><i class="fa fa-arrow-up margin-right"></i>To the top</a>
-    <p>chr.unterrainer@gmail.com</p>
+    <p>{{  mail  }}</p>
     <p>I'm not on social media</p>
     <a href="https://github.com/DollofCuty" class="button light-grey"><i class="fab fa-github fb"></i></a>
     <a href="https://www.xing.com/profile/Christian_Unterrainer3/" class="button light-grey"><i class="fab fa-xing fb"></i></a>
     <a href="https://angel.co/christian-unterrainer" class="button light-grey"><i class="fab fa-angellist fb"></i></a>
     <a href="https://www.kaggle.com/dollofcuty" class="button light-grey"><i class="fab fa-kaggle fb"></i></a>
   </footer>
-  
-  <script>
-  // Modal Image Gallery
-  function onClick(element) {
-    document.getElementById("img01").src = element.src;
-    document.getElementById("modal01").style.display = "block";
-    var captionText = document.getElementById("caption");
-    captionText.innerHTML = element.alt;
-  }
-  </script>
   {% endblock %}
 </body>
 </html>

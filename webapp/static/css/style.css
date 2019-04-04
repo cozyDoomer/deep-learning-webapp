@@ -34,14 +34,15 @@ body, html {
 .wide {letter-spacing: 10px;}
 .hover-opacity {cursor: pointer;}
 
-/* Turn off parallax scrolling for tablets and phones */
-@media only screen and (max-device-width: 1600px) {
+/* Turn off parallax scrolling for phones
+@media only screen and (max-device-width: 600px) {
   .bgimg-1, .bgimg-2, .bgimg-3 {
     background-attachment: scroll;
     min-height: 400px;
   }
 }
-
+ */
+ 
 html {
     box-sizing: border-box
 }
@@ -1765,4 +1766,12 @@ textarea {
     width: 100px;
     height: 120px;
     resize: none;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
 }

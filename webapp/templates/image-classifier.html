@@ -3,9 +3,8 @@
  <body>
     {% extends "template.html" %}
     {% block content %}
-
-    <!-- Container (IMAGE CLASSIFIER Section) -->
-    <div class="content container padding-32" id="contact">
+    
+    <div class="content container padding-32">
       <h3 class="center">IMAGE CLASSIFIER</h3>
 
       <p class="center hide-small"><em>Just choose an image to run inference of the <a href=https://arxiv.org/pdf/1712.00559.pdf>PNASNet-5</a> 
@@ -14,7 +13,7 @@
       <p class="center hide-medium hide-large"><em>Just choose an image to run the model!</em></p>
 
       <form class="center" action="{{ url_for('upload.upload_file') }}" method="POST" enctype=multipart/form-data>
-        <p><input type=file name=file>
+        <p><input type=file name=file style="width: 250px;">
            <input type=submit> 
       </form>
 
@@ -31,8 +30,8 @@
         <h4>{{prediction[2]}} with {{confidence[2]}}% confidence</h4>
       </div>
       <div class="center hide-medium hide-large">
-        <h3>{{prediction[0]}} with {{confidence[0]}}% confidence</h3>
-        <h4>{{prediction[1]}} with {{confidence[1]}}% confidence</h4>
+        <h4>{{prediction[0]}} with {{confidence[0]}}% confidence</h4>
+        <h5>{{prediction[1]}} with {{confidence[1]}}% confidence</h5>
       </div>
       {% endif %}
 
@@ -56,14 +55,13 @@
         <img src="{{ url_for('upload.send_file', filename=filename) }}" class="image" style="max-height:250px">
       </div>
       {% endif %}
-
     </div>
   </body>
 
   <!-- Footer -->
-  <footer class="footer black opacity hover-opacity-decrease center hide-small">
+  <footer class="footer black padding-16 opacity hover-opacity-decrease center hide-small">
     <a href="{{ url_for('home') }}" class="button light-grey margin-top"><i class="fas fa-arrow-left margin-right"></i>Back to the Website</a>
-    <p>chr.unterrainer@gmail.com</p>
+    <p>{{  mail  }}</p>
     <a href="https://github.com/DollofCuty" class="button light-grey"><i class="fab fa-github fb"></i></a>
     <a href="https://www.xing.com/profile/Christian_Unterrainer3/" class="button light-grey"><i class="fab fa-xing fb"></i></a>
     <a href="https://angel.co/christian-unterrainer" class="button light-grey"><i class="fab fa-angellist fb"></i></a>
@@ -71,13 +69,9 @@
   </footer>
   
   <!-- Footer mobile -->
-  <footer class="footer black opacity hover-opacity-decrease center hide-medium hide-large">
-    <a href="{{ url_for('home') }}" class="button light-grey margin-top"><i class="fas fa-arrow-left margin-right"></i>Back to the Website</a>
-    <p>chr.unterrainer@gmail.com</p>
-    <a href="https://github.com/DollofCuty" class="button light-grey"><i class="fab fa-github fb"></i></a>
-    <a href="https://www.xing.com/profile/Christian_Unterrainer3/" class="button light-grey"><i class="fab fa-xing fb"></i></a>
-    <a href="https://angel.co/christian-unterrainer" class="button light-grey"><i class="fab fa-angellist fb"></i></a>
-    <a href="https://www.kaggle.com/dollofcuty" class="button light-grey"><i class="fab fa-kaggle fb"></i></a>
+  <footer class="footer black padding-16 opacity hover-opacity-decrease center hide-medium hide-large">
+    <a href="{{ url_for('home') }}" class="button light-grey"><i class="fas fa-arrow-left margin-right"></i>Back to the Website</a>
+    <p>{{  mail  }}</p>
   </footer>
 
   {% endblock %}

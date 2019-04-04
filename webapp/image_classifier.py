@@ -7,16 +7,18 @@ import torch
 import numpy as np
 
 from pnasnet import pnasnet5large
+
 import utils
 
 image_classifier = Blueprint('image_classifier', __name__)
 
 app = Flask(__name__)
 
+
 @image_classifier.route("/image-classifier")
 
 def show():
-    return render_template("image-classifier.html")
+    return render_template("image-classifier.html", mail=current_app.config['MAIL_USERNAME'])
 
 
 @image_classifier.route("/image-classifier/<filename>")
@@ -69,4 +71,4 @@ def analyze(filename):
 
     percent = (preds_sorted[:3].numpy() * 100).round(decimals=2)
 
-    return render_template("image-classifier.html", filename=filename, prediction=class_names, confidence=percent)
+    return render_template("image-classifier.html", filename=filename, prediction=class_names, confidence=percent, mail=current_app.config['MAIL_USERNAME'])

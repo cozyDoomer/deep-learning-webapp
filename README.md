@@ -8,7 +8,13 @@ things that would need to be changed for your own website:
 
 - change personal information in home.html and cv.html 
 
-- include Photos for the frontend 
+- include Photos for the frontend
+
+- add email configuration under webapp/static/conf/email_conf.py
+
+    - format: see email_conf_example.py, MAIL_SERVER and MAIL_PORT need to be changed depending on your provider
+
+    - if you get an google api error take a look at this: [answer](https://stackoverflow.com/questions/37058567/configure-flask-mail-to-use-gmail)
 
 - include your own cv named cv.pdf in ./webapp/documents
 
@@ -18,7 +24,7 @@ Everything is under MIT license so feel free to change and tear apart everything
 
 ## Frontend
 
-Simple html/css template not a lot of javascript 
+Simple html/css template with minimal javascript 
     
 - Thinking about using a bootstrap theme and rebuild the frontend
 
