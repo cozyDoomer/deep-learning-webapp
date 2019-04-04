@@ -1,10 +1,10 @@
 /virtual_env
 webapp/instance
-webapp/static/weights
 webapp/__pycache__
+webapp/static/conf/email.csv
 
 *.png
 *.jpg
+*.pdf
 
-#webapp/static/images
-#webapp/static/uploaded
+*.pth
