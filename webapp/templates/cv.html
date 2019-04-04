@@ -28,7 +28,7 @@
             <p><i class="fa fa-briefcase fa-fw margin-right large text-teal"></i>Software Developer, Data Scientist</p>
             <p><i class="fa fa-home fa-fw margin-right large text-teal"></i>Austria, Wiener Neustadt</p>
             <p></p><i class="fa fa-phone fa-fw margin-right large text-teal"></i> Phone: +43 660/1236463</p>
-            <p><i class="fa fa-envelope fa-fw margin-right large text-teal"></i>chr.unterrainer@gmail.com</p>
+            <p><i class="fa fa-envelope fa-fw margin-right large text-teal"></i>{{  mail  }}</p>
             <!--<p><i class="fa fa-phone fa-fw margin-right large text-teal"></i>123456</p>-->
             <hr>
 
@@ -131,7 +131,6 @@
             <p>Languages: English, Latin; Basics in Math, Science und IT</p><br>
           </div>
         </div>
-
       <!-- End Right Column -->
       </div>
     <!-- End Grid -->
@@ -141,11 +140,11 @@
     
   </body>
   <!-- Footer -->
-  <footer class="container teal opacity hover-opacity-off center margin-top">
+  <footer class="container teal padding-16 opacity hover-opacity-off center margin-top">
     <a href="{{ url_for('cv.download', path=path) }}" class="button light-grey margin-top"><i class="fas fa-print margin-right"></i>Download as PDF</a>
     <br>
     <a href="{{ url_for('home') }}" class="button light-grey margin-top"><i class="fas fa-arrow-left margin-right"></i>Back to the Website</a>
-    <p>chr.unterrainer@gmail.com</p>
+    <p>{{  mail  }}</p>
     <a href="https://github.com/DollofCuty" class="button light-grey"><i class="fab fa-github fb"></i></a>
     <a href="https://www.xing.com/profile/Christian_Unterrainer3/" class="button light-grey"><i class="fab fa-xing fb"></i></a>
     <a href="https://angel.co/christian-unterrainer" class="button light-grey"><i class="fab fa-angellist fb"></i></a>
