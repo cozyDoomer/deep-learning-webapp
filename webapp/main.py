@@ -1,6 +1,6 @@
 #!/venv/bin python
 
-import os, sys
+import os, sys, logging
 from flask import Flask, render_template, current_app, request
 from forms import EmailForm
 
@@ -55,4 +55,9 @@ def home():
 install_secret_key(app)
 
 if __name__ == "__main__":
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+    if app.config['LOG_TO_STDOUT']:
+        stream_handler = logging.StreamHandler()
+        stream_handler.setLevel(logging.INFO)
+        app.logger.addHandler(stream_handler)
     app.run(debug=False, host='0.0.0.0',port=5000)
