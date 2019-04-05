@@ -126,10 +126,10 @@
       {% from "_formhelpers.html" import render_field %}
       <form action="{{ url_for('email.send', _anchor='contact') }}" method="POST">
         <dl>
-          <div class="half">
+          <div class="col-mobile">
             {{ render_field(form.name, class='input border', placeholder="Name") }}
           </div>
-          <div class="half">
+          <div class="col-mobile">
             {{ render_field(form.email_field, class="input border", placeholder="Email Address") }}
           </div>
           <div class="row">
@@ -139,7 +139,7 @@
           </div> 
         </dl>
         <div class="row">
-          <div class="col m6 center padding-large">
+          <div class="col-mobile center padding-large">
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
                 {% for category, message in messages %}
@@ -148,7 +148,7 @@
               {% endif %}
             {% endwith %}
           </div>
-          <div class="col m6 center padding-large">
+          <div class="col-mobile center padding-large">
             <button class="button black right section" type="submit">
               <i class="fa fa-paper-plane"></i> SEND MESSAGE
             </button>

@@ -783,6 +783,18 @@ a {
 }
 
 @media (max-width:600px) {
+    .col-mobile {
+        float: left;
+        width: 100%
+    }
+}
+
+.col-mobile {
+    float: left;
+    width: 49.99%
+}
+
+@media (max-width:600px) {
     .modal-content {
         margin: 0 10px;
         width: auto!important
