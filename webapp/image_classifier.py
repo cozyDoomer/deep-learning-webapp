@@ -7,6 +7,7 @@ import torch
 import numpy as np
 
 from pnasnet import pnasnet5large
+from resnet import resnet50, resnet152
 
 import utils
 
@@ -24,7 +25,7 @@ def show():
 @image_classifier.route("/image-classifier/<filename>")
 
 def analyze(filename):
-    model = pnasnet5large(num_classes=1000, pretrained='imagenet')
+    model = pnasnet5large(num_classes=1000, pretrained=True)
     model.eval()
     # loading image uploaded to the server
     load_img = utils.LoadImage()
@@ -67,7 +68,7 @@ def analyze(filename):
 
     class_keys = class_id_to_key[idxs]
     
-    class_names = [key_to_classname[x] for x in class_keys]
+    class_names = [', '.join([str(x) for x in key_to_classname[x].split(",", 2)[:2]]) for x in class_keys]
 
     percent = (preds_sorted[:3].numpy() * 100).round(decimals=2)
 

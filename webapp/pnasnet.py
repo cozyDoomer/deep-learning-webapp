@@ -8,15 +8,13 @@ import torch.utils.model_zoo as model_zoo
 
 pretrained_settings = {
     'pnasnet5large': {
-        'imagenet': {
-            'path': 'static/weights/pnasnet5large.pth',
-            'input_space': 'RGB',
-            'input_size': [3, 331, 331],
-            'input_range': [0, 1],
-            'mean': [0.5, 0.5, 0.5],
-            'std': [0.5, 0.5, 0.5],
-            'num_classes': 1000
-        }
+        'path': 'static/weights/pnasnet5large.pth',
+        'input_space': 'RGB',
+        'input_size': [3, 331, 331],
+        'input_range': [0, 1],
+        'mean': [0.5, 0.5, 0.5],
+        'std': [0.5, 0.5, 0.5],
+        'num_classes': 1000
     }
 }
 
@@ -360,13 +358,13 @@ class PNASNet5Large(nn.Module):
         return x
 
 
-def pnasnet5large(num_classes=1001, pretrained='imagenet'):
+def pnasnet5large(num_classes=1001, pretrained=True):
     r"""PNASNet-5 model architecture from the
     `"Progressive Neural Architecture Search"
     <https://arxiv.org/abs/1712.00559>`_ paper.
     """
     if pretrained:
-        settings = pretrained_settings['pnasnet5large'][pretrained]
+        settings = pretrained_settings['pnasnet5large']
         assert num_classes == settings[
             'num_classes'], 'num_classes should be {}, but is {}'.format(
             settings['num_classes'], num_classes)
@@ -375,11 +373,10 @@ def pnasnet5large(num_classes=1001, pretrained='imagenet'):
         model = PNASNet5Large(num_classes=1001)
         model.load_state_dict(torch.load(settings['path']))
 
-        if pretrained == 'imagenet':
-            new_last_linear = nn.Linear(model.last_linear.in_features, 1000)
-            new_last_linear.weight.data = model.last_linear.weight.data[1:]
-            new_last_linear.bias.data = model.last_linear.bias.data[1:]
-            model.last_linear = new_last_linear
+        new_last_linear = nn.Linear(model.last_linear.in_features, 1001)
+        new_last_linear.weight.data = model.last_linear.weight.data[1:]
+        new_last_linear.bias.data = model.last_linear.bias.data[1:]
+        model.last_linear = new_last_linear
 
         model.input_space = settings['input_space']
         model.input_size = settings['input_size']

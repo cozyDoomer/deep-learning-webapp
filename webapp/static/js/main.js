@@ -7,17 +7,19 @@ $(document).ready(function() {
     }, 5000);
 })   
 
-$('#contactForm').submit(function () {
-    sendContactForm();
-    return false;
-});
+$(document).ready(function() {
+    $('#contactForm').submit(function () {
+        sendContactForm();
+        return false;
+    });
+})
 
 // Modal Image Gallery
 function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
+    document.getElementById("img01").src = element.src;
+    document.getElementById("modal01").style.display = "block";
+    var captionText = document.getElementById("caption");
+    captionText.innerHTML = element.alt;
 }
 
 

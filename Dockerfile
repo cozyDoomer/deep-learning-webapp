@@ -18,13 +18,17 @@ COPY webapp webapp
 COPY boot.sh ./
 RUN chmod +x boot.sh
 
-#download the weights for pnasnet5 from google drive
+# download the weights for pnasnet5 from google drive
+# non direct link: https://megadl.fr/?odybfwjhlsoge9na9ibe
 RUN echo 'downloading image-classifier weights'
-RUN gdown https://drive.google.com/uc?id=1sifDhGShFfsLRr38gaC4NiodzW421QTv -O webapp/static/weights/pnasnet5large.pth
+ADD https://a-33.1fichier.com/c166816980?inline webapp/static/weights/pnasnet5large.pth
+
+# for resnet50/resnet152
+#ADD https://download.pytorch.org/models/resnet152.pth webapp/static/weights/resnet152.pth
 
 # alternatively one can download the weights with the link above and put them 
-# to webapp/static/weights/pnasnet5large.pth in the repository and copy with this:
-#COPY webapp/static/weights/pnasnet5large.pth webapp/static/weights/pnasnet5large.pth
+# to webapp/static/weights/resnet152.pth in the repository and copy with this:
+#COPY webapp/static/weights/resnet152.pth webapp/static/weights/resnet152.pth
 
 ENV FLASK_APP webapp/main.py
 
