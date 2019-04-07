@@ -38,6 +38,10 @@ USER webapp
 #expose :5000 port
 EXPOSE 5000
 
-RUN cd webapp
+#CMD gunicorn --bind 0.0.0.0:$PORT --access-logfile - --error-logfile - main:app
+
+#CMD gunicorn --bind 0.0.0.0:$PORT - main:app
+
+#CMD gunicorn -c webapp/static/conf/gunicorn_config.py --access-logfile - --error-logfile - main:app
 
 ENTRYPOINT ["./boot.sh"] 
