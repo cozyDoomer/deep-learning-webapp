@@ -55,4 +55,7 @@ def home():
 install_secret_key(app)
 
 if __name__ == "__main__":
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(logging.INFO)
+    app.logger.addHandler(stream_handler)
     app.run(debug=False, host='0.0.0.0',port=5000)

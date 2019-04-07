@@ -18,26 +18,33 @@ COPY webapp webapp
 COPY boot.sh ./
 RUN chmod +x boot.sh
 
+WORKDIR /webapp
+
 # download the weights for pnasnet5 from github release
 RUN echo 'downloading image-classifier weights'
-ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/pnasnet5large.pth webapp/static/weights/pnasnet5large.pth
+ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/pnasnet5large.pth static/weights/pnasnet5large.pth
 
 # for resnet50/resnet152
 #ADD https://download.pytorch.org/models/resnet152.pth webapp/static/weights/resnet152.pth
 
-# alternatively one can download the weights with the link above and put them 
+# alternatively one can download the weights with the links above and put them 
 # to webapp/static/weights/resnet152.pth in the repository and copy with this:
 #COPY webapp/static/weights/resnet152.pth webapp/static/weights/resnet152.pth
 
-ENV FLASK_APP webapp/main.py
+ENV FLASK_APP main.py
 
 #recursive chown on file system
 RUN chown -R webapp:webapp ./
+
 USER webapp
 
-#expose :5000 port
-EXPOSE 5000
+#expose :5000 port is not supported by heroku!
+#EXPOSE 5000
 
-RUN cd webapp
+CMD gunicorn -c static/conf/gunicorn_config.py --access-logfile - --error-logfile - main:app
 
-ENTRYPOINT ["./boot.sh"] 
+#CMD gunicorn --bind 0.0.0.0:$PORT --access-logfile - --error-logfile - main:app
+
+#CMD gunicorn -c webapp/static/conf/gunicorn_config.py --access-logfile - --error-logfile - main:app
+
+#ENTRYPOINT ["./boot.sh"] 
