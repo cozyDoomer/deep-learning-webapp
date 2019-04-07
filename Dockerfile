@@ -18,10 +18,9 @@ COPY webapp webapp
 COPY boot.sh ./
 RUN chmod +x boot.sh
 
-# download the weights for pnasnet5 from google drive
-# non direct link: https://megadl.fr/?odybfwjhlsoge9na9ibe
+# download the weights for pnasnet5 from github release
 RUN echo 'downloading image-classifier weights'
-ADD https://a-33.1fichier.com/c166816980?inline webapp/static/weights/pnasnet5large.pth
+ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/pnasnet5large.pth webapp/static/weights/pnasnet5large.pth
 
 # for resnet50/resnet152
 #ADD https://download.pytorch.org/models/resnet152.pth webapp/static/weights/resnet152.pth

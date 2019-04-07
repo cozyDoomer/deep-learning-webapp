@@ -25,9 +25,9 @@
 
       {% else %} <!-- if filename-->
 
-      <p class="center"><em>This will take 5-10 seconds</a>!</em></p>
-
       {% if prediction %} 
+    
+      <p class="center"><em>Results</em></p>
 
       <div class="center padding-small hide-small">
         <h3>{{prediction[0]}} with {{confidence[0]}}% confidence</h3>
@@ -40,6 +40,8 @@
       </div>
 
       {% else %} 
+
+      <p class="center"><em>This will take 5-10 seconds!</em></p>
 
       <div class="center padding-16 hide-small">
         <button class="button center padding-large black xlarge wide animate-opacity">
