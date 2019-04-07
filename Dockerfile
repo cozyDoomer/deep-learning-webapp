@@ -6,8 +6,8 @@ RUN useradd -ms /bin/bash webapp
 WORKDIR /home
 
 #secret key is needed to keep the client-side sessions secure
-RUN mkdir -p instance
-RUN head -c 24 /dev/urandom > instance/secret_key
+RUN mkdir -p  webapp/instance
+RUN head -c 24 /dev/urandom > webapp/instance/secret_key
 
 #pip libraries
 COPY requirements.txt requirements.txt
@@ -18,9 +18,7 @@ COPY webapp webapp
 COPY boot.sh ./
 RUN chmod +x boot.sh
 
-RUN dir
 WORKDIR webapp
-RUN dir
 
 # download the weights for pnasnet5 from github release
 RUN echo 'downloading image-classifier weights'
@@ -44,9 +42,5 @@ USER webapp
 #EXPOSE 5000
 
 CMD gunicorn --bind 0.0.0.0:$PORT main:app
-
-#CMD gunicorn --bind 0.0.0.0:$PORT --access-logfile - --error-logfile - main:app
-
-#CMD gunicorn -c webapp/static/conf/gunicorn_config.py --access-logfile - --error-logfile - main:app
 
 #ENTRYPOINT ["./boot.sh"] 
