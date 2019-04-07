@@ -18,7 +18,9 @@ COPY webapp webapp
 COPY boot.sh ./
 RUN chmod +x boot.sh
 
-WORKDIR /webapp
+RUN dir
+WORKDIR webapp
+RUN dir
 
 # download the weights for pnasnet5 from github release
 RUN echo 'downloading image-classifier weights'
@@ -41,7 +43,7 @@ USER webapp
 #expose :5000 port is not supported by heroku!
 #EXPOSE 5000
 
-CMD gunicorn -c static/conf/gunicorn_config.py --access-logfile - --error-logfile - main:app
+CMD gunicorn --bind 0.0.0.0:$PORT main:app
 
 #CMD gunicorn --bind 0.0.0.0:$PORT --access-logfile - --error-logfile - main:app
 
