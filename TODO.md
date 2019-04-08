@@ -1,7 +1,6 @@
-- try to disable button on first click
-
 - add nginx reverse proxy
 
-- upload to google cloud engine ?
+- first try to deploy to heroku for testing 
+    - upload to google cloud engine ?
 
 - use bootstrap theme instead of html/css
