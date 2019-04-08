@@ -15,7 +15,7 @@ image_classifier = Blueprint('image_classifier', __name__)
 
 app = Flask(__name__)
 
-model_links =	{
+model_links = {
   'pnasnet5': 'https://arxiv.org/pdf/1712.00559.pdf',
   'resnet152': 'https://arxiv.org/pdf/1512.03385.pdf',
   'resnet50': 'https://arxiv.org/pdf/1512.03385.pdf'

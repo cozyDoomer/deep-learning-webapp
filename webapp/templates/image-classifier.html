@@ -45,17 +45,15 @@
       <p class="center"><em>This will take 5-10 seconds!</em></p>
 
       <div class="center padding-16 hide-small">
-        <button class="button center padding-large black xlarge wide animate-opacity">
-          <a href="{{ url_for('image_classifier.analyze', filename=filename) }}" class="button" onclick="$(this).closest('div').remove();">ANALYZE</a>
-        </button>
+        <a href="{{ url_for('image_classifier.analyze', filename=filename) }}" 
+        class="button center padding-large black xlarge wide animate-opacity" onclick="$(this).closest('div').remove();">ANALYZE</a>
       </div>
 
       <div class="center padding-small hide-medium hide-large">
-        <button class="button center padding-medium black small wide animate-opacity">
-          <a href="{{ url_for('image_classifier.analyze', filename=filename) }}" class="button" onclick="$(this).closest('div').remove();">ANALYZE</a>
-        </button>
+        <a href="{{ url_for('image_classifier.analyze', filename=filename) }}" 
+        class="button center padding-medium black small wide animate-opacity" onclick="$(this).closest('div').remove();">ANALYZE</a>
       </div>
-      
+
       {% endif %}
 
       <div class="center hide-small">
@@ -70,15 +68,13 @@
       {% if prediction %}
 
       <div class="center padding-16 hide-small">
-        <button class="button center padding-large black xlarge wide animate-opacity">
-          <a href="{{ url_for('image_classifier.show', filename=filename) }}" class="button">TRY ANOTHER</a>
-        </button>
+        <a href="{{ url_for('image_classifier.show', filename=filename) }}" 
+        class="button center padding-large black xlarge wide animate-opacity">TRY ANOTHER</a>
       </div>
 
       <div class="center padding-small hide-medium hide-large">
-        <button class="button center padding-medium black small wide animate-opacity">
-          <a href="{{ url_for('image_classifier.show', filename=filename) }}" class="button"">TRY ANOTHER</a>
-        </button>
+        <a href="{{ url_for('image_classifier.show', filename=filename) }}" 
+        class="button center padding-medium black small wide animate-opacity"">TRY ANOTHER</a>
       </div>
 
       {% endif %}

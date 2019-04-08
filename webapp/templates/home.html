@@ -64,8 +64,7 @@
     <p class="center">
       <p> This website is using a <a href="http://flask.pocoo.org/">Flask</a> backend and for the frontend I customized a simple bootstrap theme.</p>
       <p> The demo runs a <a href=https://github.com/pytorch/pytorch>pytorch</a> deep-learning model, 
-      <a href=https://arxiv.org/pdf/1712.00559.pdf>PNASNet-5</a> 
-      from <a href=https://github.com/Cadene/pretrained-models.pytorch>this</a> great repository by Cadene.</p>
+        <a href="{{ link }}">{{  name  }}</a>, trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
       <p> Here are some examples of what I do:</p>
     </p>
     <br>
@@ -128,7 +127,7 @@
       <p>Write me an e-mail or leave me a note:</p>
 
       {% from "_formhelpers.html" import render_field %}
-      <form action="{{ url_for('email.send', _anchor='contact') }}" method="POST">
+      <form action="{{ url_for('send_message', _anchor='contact') }}" method="POST">
         <dl>
           <div class="col-mobile">
             {{ render_field(form.name, class='input border', placeholder="Name") }}

@@ -20,6 +20,7 @@ def preprocess_image(filepath, min_size=299):
     img = Image.open(filepath)
 
     # rotate if exif encoded
+    exif_bytes = None
     if "exif" in img.info:
         exif_dict = piexif.load(img.info["exif"])
 
@@ -45,7 +46,10 @@ def preprocess_image(filepath, min_size=299):
     # resize image to min_size (keep aspect ratio)
     ratio = max(min_size/img.width, min_size/img.height)
     img.thumbnail((img.width * ratio, img.height * ratio), Image.ANTIALIAS)
-    img.save(filepath, exif=exif_bytes)
+    
+    if exif_bytes:
+        img.save(filepath, exif=exif_bytes)
+    img.save(filepath)
     
 @upload.route('/upload', methods=['POST', 'GET'])
 
