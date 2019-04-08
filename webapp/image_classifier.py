@@ -6,7 +6,7 @@ from flask import Flask, Blueprint, current_app, render_template
 import torch
 import numpy as np
 
-from pnasnet import pnasnet5large
+from pnasnet import pnasnet5
 from resnet import resnet50, resnet152
 
 import utils
@@ -25,7 +25,7 @@ model_links =	{
 model_name = os.getenv('NNET', 'resnet50')
 
 if model_name == 'pnasnet5':
-    model = pnasnet5large(num_classes=1000, pretrained=True)
+    model = pnasnet5(pretrained=True)
 elif model_name == 'resnet152':
     model = resnet152(pretrained=True)
 elif model_name == 'resnet50': # default

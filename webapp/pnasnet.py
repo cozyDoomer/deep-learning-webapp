@@ -7,14 +7,14 @@ import torch.utils.model_zoo as model_zoo
 
 
 pretrained_settings = {
-    'pnasnet5large': {
-        'path': 'static/weights/pnasnet5large.pth',
+    'pnasnet5': {
+        'path': 'static/weights/pnasnet5.pth',
         'input_space': 'RGB',
         'input_size': [3, 331, 331],
         'input_range': [0, 1],
         'mean': [0.5, 0.5, 0.5],
         'std': [0.5, 0.5, 0.5],
-        'num_classes': 1000
+        'num_classes': 1001
     }
 }
 
@@ -277,9 +277,9 @@ class Cell(CellBase):
         return x_out
 
 
-class PNASNet5Large(nn.Module):
+class PNASNet5(nn.Module):
     def __init__(self, num_classes=1001):
-        super(PNASNet5Large, self).__init__()
+        super(PNASNet5, self).__init__()
         self.num_classes = num_classes
         self.conv_0 = nn.Sequential(OrderedDict([
             ('conv', nn.Conv2d(3, 96, kernel_size=3, stride=2, bias=False)),
@@ -358,19 +358,17 @@ class PNASNet5Large(nn.Module):
         return x
 
 
-def pnasnet5large(num_classes=1001, pretrained=True):
+def pnasnet5(pretrained=True):
     r"""PNASNet-5 model architecture from the
     `"Progressive Neural Architecture Search"
     <https://arxiv.org/abs/1712.00559>`_ paper.
     """
     if pretrained:
-        settings = pretrained_settings['pnasnet5large']
-        assert num_classes == settings[
-            'num_classes'], 'num_classes should be {}, but is {}'.format(
-            settings['num_classes'], num_classes)
+        settings = pretrained_settings['pnasnet5']
+        num_classes = settings['num_classes']
 
         # both 'imagenet'&'imagenet+background' are loaded from same parameters
-        model = PNASNet5Large(num_classes=1001)
+        model = PNASNet5(num_classes=num_classes)
         model.load_state_dict(torch.load(settings['path']))
 
         new_last_linear = nn.Linear(model.last_linear.in_features, 1001)
@@ -385,5 +383,5 @@ def pnasnet5large(num_classes=1001, pretrained=True):
         model.mean = settings['mean']
         model.std = settings['std']
     else:
-        model = PNASNet5Large(num_classes=num_classes)
+        model = PNASNet5(num_classes=num_classes)
     return model

@@ -4,6 +4,8 @@ import os
 from flask import Flask, flash, request, redirect, url_for, Blueprint, current_app, render_template, send_from_directory
 
 from werkzeug.utils import secure_filename
+from PIL import Image, ExifTags
+import piexif
 
 upload = Blueprint('upload', __name__)
 
@@ -14,6 +16,37 @@ app = Flask(__name__)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def preprocess_image(filepath, min_size=299):
+    img = Image.open(filepath)
+
+    # rotate if exif encoded
+    if "exif" in img.info:
+        exif_dict = piexif.load(img.info["exif"])
+
+        if piexif.ImageIFD.Orientation in exif_dict["0th"]:
+            orientation = exif_dict["0th"].pop(piexif.ImageIFD.Orientation)
+            exif_bytes = piexif.dump(exif_dict)
+
+            if orientation == 2:
+                img = img.transpose(Image.FLIP_LEFT_RIGHT)
+            elif orientation == 3:
+                img = img.rotate(180)
+            elif orientation == 4:
+                img = img.rotate(180).transpose(Image.FLIP_LEFT_RIGHT)
+            elif orientation == 5:
+                img = img.rotate(-90, expand=True).transpose(Image.FLIP_LEFT_RIGHT)
+            elif orientation == 6:
+                img = img.rotate(-90, expand=True)
+            elif orientation == 7:
+                img = img.rotate(90, expand=True).transpose(Image.FLIP_LEFT_RIGHT)
+            elif orientation == 8:
+                img = img.rotate(90, expand=True)
+
+    # resize image to min_size (keep aspect ratio)
+    ratio = max(min_size/img.width, min_size/img.height)
+    img.thumbnail((img.width * ratio, img.height * ratio), Image.ANTIALIAS)
+    img.save(filepath, exif=exif_bytes)
+    
 @upload.route('/upload', methods=['POST', 'GET'])
 
 def upload_file():
@@ -21,14 +54,18 @@ def upload_file():
         # check if the post request has the file part
         if 'file' not in request.files:
             return redirect(request.url)
+
         file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
+        # if user does not select file, browser submit a empty part without filename
         if file.filename == '':
             return redirect(request.url)
+
+        # check if file extension is in ALLOWED_EXTENSIONS
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
+            preprocess_image(filepath, min_size=299)
             return render_template("image-classifier.html", filename=filename, mail=current_app.config['MAIL_USERNAME']) 
     return render_template("image-classifier.html", error='error', mail=current_app.config['MAIL_USERNAME']) 
 

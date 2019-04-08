@@ -30,10 +30,10 @@
 
       <div class="col m6 padding-large">
           <p>I started out as software developer graduating from HTL Wiener Neustadt, mostly working with C# and Python.</p>
-          <p>Over time I have gained experience in agile development, clean code guidelines and tools that help me 
-          to keep projects simple (eg. git, virtualenv, unit-testing, docker).</p>
-          <p>In the last year I spent a lot of time working on machine-learning tasks, more specifically computer vision
-          using PyTorch and fast.ai combined with more data focused libraries like pandas, and numpy in Python.</p>
+          <p>Over time I have gained experience in agile development, best practices (eg. git, virtualenv, unit-testing, docker) 
+             and various programming languages.</p>
+          <p>In the last year I spent a lot of time working on machine-learning tasks, for structured and unstructured data
+             using PyTorch and fast.ai combined with more data focused libraries like pandas, and numpy in Python.</p>
       </div>
     </div>
     <p class="large center padding-16">Im really good at:</p>
@@ -117,7 +117,8 @@
   <!-- Container (Contact Section) -->
   <div class="content container padding-64" id="contact">
     <h3 class="center">WHERE I WORK</h3>
-    <p class="center"><em>I'd like to hear from you!</em></p>
+    <p class="center"><em>I'm currently looking for work</em></p>
+    <p class="center"><em>.. and I'd like to hear from you!</em></p>
 
     <div class="row padding-32 section">
       <div class="large margin-bottom">
@@ -171,6 +172,33 @@
     <a href="https://angel.co/christian-unterrainer" class="button light-grey"><i class="fab fa-angellist fb"></i></a>
     <a href="https://www.kaggle.com/dollofcuty" class="button light-grey"><i class="fab fa-kaggle fb"></i></a>
   </footer>
+  
+  <script>
+    // setTimeout() function will be fired after page is loaded
+    // it will wait for 5 sec. and then will fire
+    // $(".message_flash").hide() function
+    $(document).ready(function() {
+      setTimeout(function() {
+        $(".message_flash").animate({ opacity: 0 })
+      }, 5000);
+    })   
+
+    $(document).ready(function() {
+      $('#contactForm').submit(function () {
+        sendContactForm();
+        return false;
+      });
+    })
+
+    // Modal Image Gallery
+    function onClick(element) {
+      document.getElementById("img01").src = element.src;
+      document.getElementById("modal01").style.display = "block";
+      var captionText = document.getElementById("caption");
+      captionText.innerHTML = element.alt;
+    }
+  </script>
+
   {% endblock %}
 </body>
 </html>

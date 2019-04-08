@@ -205,7 +205,7 @@ def resnet50(pretrained=False, **kwargs):
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
     settings = pretrained_settings['resnet50']
-    model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs)
+    model = ResNet(Bottleneck, [3, 4, 6, 3], num_classes=settings['num_classes'], **kwargs)
     if pretrained:
         model.load_state_dict(torch.load(settings['path']))
     
@@ -224,7 +224,7 @@ def resnet152(pretrained=False, **kwargs):
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
     settings = pretrained_settings['resnet152']
-    model = ResNet(Bottleneck, [3, 8, 36, 3], **kwargs)
+    model = ResNet(Bottleneck, [3, 8, 36, 3], num_classes=settings['num_classes'], **kwargs)
     if pretrained:
         model.load_state_dict(torch.load(settings['path']))
     

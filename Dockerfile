@@ -21,13 +21,13 @@ WORKDIR webapp
 # download the weights for pnasnet5 from github release
 RUN echo 'downloading image-classifier weights'
 
-# pnasnet5large, requires quite some ram and cpu
-#ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/pnasnet5large.pth static/weights/pnasnet5large.pth
-#ENV NNET pnasnet5
+# pnasnet5, requires quite some ram and cpu
+ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/pnasnet5.pth static/weights/pnasnet5.pth
+ENV NNET pnasnet5
 
 # resnet152
-ADD https://download.pytorch.org/models/resnet152-b121ed2d.pth static/weights/resnet152.pth
-ENV NNET resnet152
+#ADD https://download.pytorch.org/models/resnet152-b121ed2d.pth static/weights/resnet152.pth
+#ENV NNET resnet152
 
 # resnet50
 #ADD https://download.pytorch.org/models/resnet50-19c8e357.pth static/weights/resnet50.pth
