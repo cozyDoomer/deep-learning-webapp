@@ -1,6 +1,6 @@
 #!/venv/bin python
 
-import os
+import os, gc, psutil
 from flask import Flask, Blueprint, current_app, render_template
 
 import torch
@@ -21,26 +21,38 @@ model_links = {
   'resnet50': 'https://arxiv.org/pdf/1512.03385.pdf'
 }
 
-# initialize model depending on env. variable set in dockerfile
-model_name = os.getenv('NNET', 'resnet50')
+def init_model(model_name):
+    # initialize model depending on env. variable set in dockerfile
+    if model_name == 'pnasnet5':
+        model = pnasnet5(pretrained=True)
+    elif model_name == 'resnet152':
+        model = resnet152(pretrained=True)
+    elif model_name == 'resnet50':
+        model = resnet50(pretrained=True) 
+    return model
 
-if model_name == 'pnasnet5':
-    model = pnasnet5(pretrained=True)
-elif model_name == 'resnet152':
-    model = resnet152(pretrained=True)
-elif model_name == 'resnet50': # default
-    model = resnet50(pretrained=True)    
+def get_name():
+    return os.getenv('NNET', 'resnet50') # resnet50 default
 
+def get_link(model_name):
+    return model_links[model_name]
 
 @image_classifier.route("/image-classifier")
 
 def show():
-    return render_template("image-classifier.html", mail=current_app.config['MAIL_USERNAME'], name=model_name, link=model_links[model_name])
+    model_name = get_name()
+    model_link = get_link(model_name)
+    
+    return render_template("image-classifier.html", mail=current_app.config['MAIL_USERNAME'], name=model_name, link=model_link)
 
 
 @image_classifier.route("/image-classifier/<filename>")
 
 def analyze(filename):
+    model_name = get_name()
+    model_link = get_link(model_name)
+
+    model = init_model(model_name)
     model.eval()
     # loading image uploaded to the server
     load_img = utils.LoadImage()
@@ -88,4 +100,4 @@ def analyze(filename):
     percent = (preds_sorted[:3].numpy() * 100).round(decimals=2)
 
     return render_template("image-classifier.html", filename=filename, prediction=class_names, confidence=percent, 
-                                                    name=model_name, link=model_links[model_name], mail=current_app.config['MAIL_USERNAME'])
+                                                    name=model_name, link=model_link, mail=current_app.config['MAIL_USERNAME'])
