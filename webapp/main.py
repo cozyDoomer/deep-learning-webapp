@@ -5,7 +5,9 @@ from flask import Flask, render_template, current_app, request, flash
 from flask_mail import Mail, Message
 from forms import EmailForm
 
-from image_classifier import image_classifier
+from pytorch_classifier import image_classifier
+#from fastai_classifier import image_classifier
+
 from upload import upload
 from cv import cv
 

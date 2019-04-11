@@ -1,6 +1,6 @@
 #!/venv/bin python
 
-import os, gc, psutil
+import os, gc
 from flask import Flask, Blueprint, current_app, render_template
 
 import torch
@@ -88,7 +88,6 @@ def analyze(filename):
 
     # get highest confidence index and value 
     preds_sorted, idxs = output.sort(descending=True)
-    #max, argmax = output.max(0)
 
     # extract classname from index
     idxs = idxs.numpy()[:3]
@@ -98,6 +97,9 @@ def analyze(filename):
     class_names = [', '.join([str(x) for x in key_to_classname[x].split(",", 2)[:2]]) for x in class_keys]
 
     percent = (preds_sorted[:3].numpy() * 100).round(decimals=2)
+
+    del model, load_img, tf_img, img, tensor, input, synsets, splits, class_id_to_key, output, preds_sorted, idxs, class_keys
+    gc.collect()
 
     return render_template("image-classifier.html", filename=filename, prediction=class_names, confidence=percent, 
                                                     name=model_name, link=model_link, mail=current_app.config['MAIL_USERNAME'])
