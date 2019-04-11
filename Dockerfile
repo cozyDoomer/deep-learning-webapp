@@ -39,6 +39,7 @@ ENV NNET resnet152
 #COPY webapp/static/weights/<model>.pth webapp/static/weights/<model>.pth
 
 ENV FLASK_APP main.py
+ENV PYTHONUNBUFFERED TRUE
 
 #recursive chown on file system for the webapp user
 RUN chown -R webapp:webapp ./
@@ -48,6 +49,6 @@ USER webapp
 # expose :5000 port is not supported by heroku!
 #EXPOSE 5000
 
-CMD gunicorn --bind 0.0.0.0:$PORT main:app
+CMD gunicorn -R --bind 0.0.0.0:$PORT main:app
 
 #ENTRYPOINT ["./boot.sh"] 

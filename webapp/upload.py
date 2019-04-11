@@ -1,6 +1,6 @@
 #!/venv/bin python
 
-import os
+import os, gc
 from flask import Flask, flash, request, redirect, url_for, Blueprint, current_app, render_template, send_from_directory
 
 from werkzeug.utils import secure_filename
@@ -70,7 +70,12 @@ def upload_file():
             filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
             preprocess_image(filepath, min_size=299)
+
+            del file, filepath
+            gc.collect()
+
             return render_template("image-classifier.html", filename=filename, mail=current_app.config['MAIL_USERNAME']) 
+
     return render_template("image-classifier.html", error='error', mail=current_app.config['MAIL_USERNAME']) 
 
 @upload.route('/upload/<filename>', methods=['GET'])
