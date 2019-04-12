@@ -49,7 +49,6 @@ def show():
 @image_classifier.route("/image-classifier/<filename>")
 
 def analyze(filename):
-    print('start of analyze: ', gc.get_count())
     model_name = get_name()
     model_link = get_link(model_name)
 
@@ -99,9 +98,8 @@ def analyze(filename):
 
     percent = (preds_sorted[:3].numpy() * 100).round(decimals=2)
 
-    print('before gc: ', gc.get_count())
     del model, load_img, tf_img, img, tensor, input, synsets, splits, class_id_to_key, output, preds_sorted, idxs, class_keys
     gc.collect()
-    print('after gc: ', gc.get_count())
+
     return render_template("image-classifier.html", filename=filename, prediction=class_names, confidence=percent, 
                                                     name=model_name, link=model_link, mail=current_app.config['MAIL_USERNAME'])
