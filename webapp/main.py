@@ -13,9 +13,6 @@ from pytorch_classifier import image_classifier
 from upload import upload
 from cv import cv
 
-import gc
-gc.set_debug(gc.DEBUG_STATS)
-
 app = Flask(__name__)
 
 app.register_blueprint(image_classifier)
@@ -101,4 +98,4 @@ if __name__ == '__main__':
     #app.config['PROFILE'] = True
     #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
 
-    app.run(debug=False, host='0.0.0.0',port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)

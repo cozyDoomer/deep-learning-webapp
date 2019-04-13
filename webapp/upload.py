@@ -50,6 +50,9 @@ def preprocess_image(filepath, min_size=299):
     if exif_bytes:
         img.save(filepath, exif=exif_bytes)
     img.save(filepath)
+
+    del img
+    gc.collect()
     
 @upload.route('/upload', methods=['POST', 'GET'])
 

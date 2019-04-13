@@ -1,0 +1,11 @@
+.git
+virtual_env
+
+webapp/instance
+webapp/__pycache__
+webapp/static/uploaded/**/*
+
+
+**/*.md
+
+**/*.pth

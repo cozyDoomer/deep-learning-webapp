@@ -5,10 +5,6 @@ RUN useradd -ms /bin/bash webapp
 
 WORKDIR /home
 
-# secret key is needed to keep the client-side sessions secure
-RUN mkdir -p  webapp/instance
-RUN head -c 24 /dev/urandom > webapp/instance/secret_key
-
 # pip libraries
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt 
@@ -18,6 +14,10 @@ COPY webapp webapp
 
 WORKDIR webapp
 
+# secret key is needed to keep the client-side sessions secure
+RUN mkdir -p  instance
+RUN head -c 24 /dev/urandom > instance/secret_key
+
 # download the weights for pnasnet5 from github release
 RUN echo 'downloading image-classifier weights'
 
@@ -26,12 +26,12 @@ RUN echo 'downloading image-classifier weights'
 #ENV NNET pnasnet5
 
 # resnet152
-#ADD https://download.pytorch.org/models/resnet152-b121ed2d.pth static/weights/resnet152.pth
-#ENV NNET resnet152
+ADD https://download.pytorch.org/models/resnet152-b121ed2d.pth static/weights/resnet152.pth
+ENV NNET resnet152
 
 # resnet50
-ADD https://download.pytorch.org/models/resnet50-19c8e357.pth static/weights/resnet50.pth
-ENV NNET resnet50
+#ADD https://download.pytorch.org/models/resnet50-19c8e357.pth static/weights/resnet50.pth
+#ENV NNET resnet50
 
 # alternatively download the weights for one model with the links above 
 # store them in webapp/static/weights/<model>.pth in the local repository 
@@ -46,9 +46,9 @@ RUN chown -R webapp:webapp ./
 
 USER webapp
 
-# expose :5000 port is not supported by heroku!
+# expose is not supported by heroku!
 #EXPOSE 5000
 
-CMD gunicorn -R --bind 0.0.0.0:$PORT main:app
+CMD gunicorn -R --max-requests 4 --bind 0.0.0.0:$PORT main:app
 
 #ENTRYPOINT ["./boot.sh"] 
