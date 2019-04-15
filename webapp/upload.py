@@ -51,7 +51,9 @@ def preprocess_image(filepath, min_size=299):
         img.save(filepath, exif=exif_bytes)
     img.save(filepath)
 
-    del img
+    img = None
+    exif_bytes = None
+    exif_dict = None
     gc.collect()
     
 @upload.route('/upload', methods=['POST', 'GET'])
@@ -74,7 +76,8 @@ def upload_file():
             file.save(filepath)
             preprocess_image(filepath, min_size=299)
 
-            del file, filepath
+            file = None 
+            filepath = None
             gc.collect()
 
             return render_template("image-classifier.html", filename=filename, mail=current_app.config['MAIL_USERNAME']) 

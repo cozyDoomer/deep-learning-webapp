@@ -49,6 +49,6 @@ USER webapp
 # expose is not supported by heroku!
 #EXPOSE 5000
 
-CMD gunicorn -R --max-requests 4 --bind 0.0.0.0:$PORT main:app
+CMD gunicorn -R --max-requests 10 --bind 0.0.0.0:$PORT main:app
 
 #ENTRYPOINT ["./boot.sh"] 

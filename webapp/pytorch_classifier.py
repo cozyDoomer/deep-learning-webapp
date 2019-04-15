@@ -3,9 +3,7 @@
 import os, gc
 from flask import Flask, Blueprint, current_app, render_template
 
-#from torch import autograd.Variable
 from torch.nn.functional import softmax
-#import numpy as np
 
 from pnasnet import pnasnet5
 from resnet import resnet50, resnet152
@@ -69,8 +67,8 @@ def analyze(filename):
     # len(synsets)==1001
     # sysnets[0] == background
     synsets = [x.strip() for x in synsets]
-    splits = [line.split(' ') for line in synsets]
-    key_to_classname = {spl[0]:' '.join(spl[1:]) for spl in splits}
+    synsets = [line.split(' ') for line in synsets]
+    key_to_classname = {spl[0]:' '.join(spl[1:]) for spl in synsets}
 
     with open(os.path.join(current_app.config['IMAGENET_FOLDER'], 'imagenet_classes.txt'), 'r') as f:
         class_id_to_key = f.readlines()
@@ -95,7 +93,13 @@ def analyze(filename):
 
     percent = (preds_sorted[:3].numpy() * 100).round(decimals=2)
     
-    del model, load_img, tf_img, tensor, synsets, splits, class_id_to_key, output, preds_sorted, idxs, class_keys
+    model = None 
+    tensor = None
+    synsets = None 
+    output = None 
+    preds_sorted = None
+    idxs = None
+    class_keys = None 
     gc.collect()
 
     return render_template("image-classifier.html", filename=filename, prediction=class_names, confidence=percent, 
