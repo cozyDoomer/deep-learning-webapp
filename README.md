@@ -18,8 +18,6 @@ things that would need to be changed for your own website:
 
 - include your own cv named cv.pdf in ./webapp/documents
 
-Everything is under MIT license so feel free to change and tear apart everything, I'd be happy about a shoutout.
-
 ## personal website I use including a pytorch image-classifier
 
 ## Frontend
