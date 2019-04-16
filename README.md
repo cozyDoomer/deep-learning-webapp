@@ -18,31 +18,6 @@ things that would need to be changed for your own website:
 
 - include your own cv named cv.pdf in ./webapp/documents
 
-## personal website I use including a pytorch image-classifier
-
-## Frontend
-
-Simple html/css template with minimal javascript 
-    
-- Thinking about using a bootstrap theme and rebuild the frontend
-
-## Backend
-
-Flask: micro webframework for Python based on Werkzeug, Jinja 2
-
-## Gunicorn
-
-Python WSGI HTTP Server for UNIX
-
-acts as webserver accepting requests from Flask
-
-- TODO: add Nginx as reverse Proxy and load balancer (probably not needed for my own site but can't hurt)
-
-## Docker 
-
-The dockerfile builds some layers on top of the pytorch-cpu docker from [Deepo](https://github.com/ufoym/deepo) 
-
-The specific docker is: ufoym/deepo:pytorch-py36-cpu
 
 # Installing
 
@@ -96,3 +71,31 @@ and then finally
 ```
 python main.py
 ```
+
+# Details
+
+## personal website I use including a pytorch image-classifier
+
+## Frontend
+
+Simple html/css template with minimal javascript 
+    
+- Thinking about using a bootstrap theme and rebuild the frontend
+
+## Backend
+
+Flask: micro webframework for Python based on Werkzeug, Jinja 2
+
+## Gunicorn
+
+Python WSGI HTTP Server for UNIX
+
+acts as webserver accepting requests from Flask
+
+- TODO: add Nginx as reverse Proxy and load balancer (probably not needed for my own site but can't hurt)
+
+## Docker 
+
+The dockerfile builds some layers on top of the pytorch-cpu docker from [Deepo](https://github.com/ufoym/deepo) 
+
+The specific docker is: ufoym/deepo:pytorch-py36-cpu
