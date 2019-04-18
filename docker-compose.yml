@@ -1,0 +1,15 @@
+version: "2"
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./webapp:/webapp
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: gunicorn
