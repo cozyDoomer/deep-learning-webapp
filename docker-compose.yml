@@ -4,12 +4,13 @@ services:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "5000:5000"
+      - "8080:80"
     volumes:
       - ./webapp:/webapp
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - web
   web:
+    image: flask-webapp:latest
     build: .
     container_name: gunicorn

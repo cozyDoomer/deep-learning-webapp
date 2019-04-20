@@ -46,9 +46,8 @@ RUN chown -R webapp:webapp ./
 
 USER webapp
 
-# expose is not supported by heroku!
-#EXPOSE 8000
+EXPOSE 8080
 
-CMD gunicorn -R --max-requests 10 --bind 0.0.0.0:8000 main:app --daemon
+CMD gunicorn -R --max-requests 10 --bind unix:/tmp/gunicorn.sock main:app 
 
 #ENTRYPOINT ["./boot.sh"] 
