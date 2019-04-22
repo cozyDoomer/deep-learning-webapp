@@ -41,10 +41,6 @@ ENV NNET resnet50
 ENV FLASK_APP main.py
 ENV PYTHONUNBUFFERED TRUE
 
-ENV LETSENCRYPT_EMAIL=chr.unterrainer@gmail.com
-ENV LETSENCRYPT_HOST christianunterrainer.com
-ENV VIRTUAL_HOST christianunterrainer.com
-
 #recursive chown on file system for the webapp user
 RUN chown -R webapp:webapp ./
 
