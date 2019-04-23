@@ -273,7 +273,7 @@ server {
 	{{ end }}
 
 	location / {
-		{ if eq $proto "uwsgi" }}
+		{{ if eq $proto "uwsgi" }}
 		include uwsgi_params;
 		uwsgi_pass {{ trim $proto }}://{{ trim $upstream_name }};
 		{{ else if eq $proto "fastcgi" }}

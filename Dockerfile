@@ -41,6 +41,10 @@ ENV NNET resnet50
 ENV FLASK_APP main.py
 ENV PYTHONUNBUFFERED TRUE
 
+ENV NGINX_WEB=nginx-web
+ENV DOCKER_GEN=nginx-gen
+ENV LETS_ENCRYPT=nginx-letsencrypt
+
 #recursive chown on file system for the webapp user
 RUN chown -R webapp:webapp ./
 

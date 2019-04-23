@@ -12,6 +12,7 @@ services:
       - LETSENCRYPT_HOST=christianunterrainer.com
       - VIRTUAL_HOST=christianunterrainer.com
       - VIRTUAL_PORT=8080
+
   nginx-web:
     image: nginx
     labels:
@@ -54,6 +55,8 @@ services:
         max-file: "10"
 
   nginx-letsencrypt:
+    depends_on:
+      - nginx-gen
     image: jrcs/letsencrypt-nginx-proxy-companion
     container_name: nginx-letsencrypt
     restart: always
