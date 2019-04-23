@@ -50,7 +50,7 @@ def preprocess_image(filepath, min_size=299):
     if exif_bytes:
         img.save(filepath, exif=exif_bytes)
     img.save(filepath)
-
+    print(f'resized image: {img.size}')
     img = None
     exif_bytes = None
     exif_dict = None

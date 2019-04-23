@@ -98,4 +98,4 @@ if __name__ == '__main__':
     #app.config['PROFILE'] = True
     #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
 
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=8080)
