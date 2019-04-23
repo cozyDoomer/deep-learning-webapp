@@ -90,9 +90,9 @@ install_secret_key(app)
 
 if __name__ == '__main__':
     # heroku loggin:
-    stream_handler = logging.StreamHandler()
-    stream_handler.setLevel(logging.INFO)
-    app.logger.addHandler(stream_handler)
+    #stream_handler = logging.StreamHandler()
+    #stream_handler.setLevel(logging.INFO)
+    #app.logger.addHandler(stream_handler)
 
     # for profiling:
     #app.config['PROFILE'] = True

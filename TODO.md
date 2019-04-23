@@ -1,6 +1,4 @@
-- add nginx reverse proxy
+- fix nginx configuration for image classifier
 
-- first try to deploy to heroku for testing 
-    - upload to google cloud engine ?
-
-- use bootstrap theme instead of html/css
+- when trying to send message through frontend:
+  - connect() failed (111: Connection refused) while connecting to upstream

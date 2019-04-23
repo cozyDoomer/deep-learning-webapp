@@ -26,12 +26,12 @@ RUN echo 'downloading image-classifier weights'
 #ENV NNET pnasnet5
 
 # resnet152
-ADD https://download.pytorch.org/models/resnet152-b121ed2d.pth static/weights/resnet152.pth
-ENV NNET resnet152
+#ADD https://download.pytorch.org/models/resnet152-b121ed2d.pth static/weights/resnet152.pth
+#ENV NNET resnet152
 
 # resnet50
-#ADD https://download.pytorch.org/models/resnet50-19c8e357.pth static/weights/resnet50.pth
-#ENV NNET resnet50
+ADD https://download.pytorch.org/models/resnet50-19c8e357.pth static/weights/resnet50.pth
+ENV NNET resnet50
 
 # alternatively download the weights for one model with the links above 
 # store them in webapp/static/weights/<model>.pth in the local repository 
@@ -41,14 +41,17 @@ ENV NNET resnet152
 ENV FLASK_APP main.py
 ENV PYTHONUNBUFFERED TRUE
 
+ENV NGINX_WEB=nginx-web
+ENV DOCKER_GEN=nginx-gen
+ENV LETS_ENCRYPT=nginx-letsencrypt
+
 #recursive chown on file system for the webapp user
 RUN chown -R webapp:webapp ./
 
 USER webapp
 
-# expose is not supported by heroku!
-#EXPOSE 5000
+EXPOSE 8080
 
-CMD gunicorn -R --max-requests 10 --bind 0.0.0.0:$PORT main:app
+CMD gunicorn -R --max-requests 10 --bind 0.0.0.0:8080 main:app 
 
 #ENTRYPOINT ["./boot.sh"] 

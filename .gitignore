@@ -1,7 +1,11 @@
 /virtual_env
+
 webapp/instance
 webapp/__pycache__
 webapp/static/conf/email.csv
+
+etc/html/**
+etc/nginx/certs/**
 
 *.png
 *.jpg
