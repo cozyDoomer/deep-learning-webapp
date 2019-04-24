@@ -25,7 +25,7 @@ def init_learner(model_name):
   return learn
 
 def get_name():
-    return os.getenv('NNET', 'inceptionresnetv2') # resnet50 default
+    return os.getenv('NNET', 'inceptionresnetv2') # inceptionresnetv2 default for fastai
 
 def get_link(model_name):
     return model_links[model_name]

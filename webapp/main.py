@@ -5,10 +5,14 @@ from flask import Flask, render_template, current_app, request, flash
 from flask_mail import Mail, Message
 from forms import EmailForm
 
-#from pytorch_classifier import image_classifier
-from fastai_classifier import image_classifier
-
 #from werkzeug.contrib.profiler import ProfilerMiddleware
+
+# import classifier depending on environment variable set in Dockerfile and 
+nnet_library = os.getenv('NNETLIBRARY', 'fastai')
+if nnet_library == 'pytorch':
+    from pytorch_classifier import image_classifier
+elif nnet_library == 'fastai':
+    from fastai_classifier import image_classifier
 
 from upload import upload
 from cv import cv
@@ -26,6 +30,10 @@ model_links = {
   'inceptionresnetv2': 'https://arxiv.org/pdf/1602.07261.pdf'
 }
 
+library_links = {
+  'fastai': 'https://github.com/fastai/fastai',
+  'pytorch': 'https://github.com/pytorch/pytorch'
+}
 
 with app.app_context():
     #initialize email configuration
@@ -66,7 +74,8 @@ def install_secret_key(app, filename='secret_key'):
 
 def home():
     form = EmailForm(request.form)
-    return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], name=model_name, link=model_links[model_name])
+    return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], nnet_library=nnet_library, 
+                            library_link=library_links[nnet_library], name=model_name, link=model_links[model_name])
 
 @app.route('/message', methods=['POST'])
 
@@ -81,10 +90,12 @@ def send_message():
         msg.html = f'{form.email_field.data}<br>{mail.body}'
         mail.send(msg)
         flash('Message sent', 'success')
-        return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], name=model_name, link=model_links[model_name])
+        return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], nnet_library=nnet_library, 
+                               library_link=library_links[nnet_library], name=model_name, link=model_links[model_name])
     
     flash('There was an error sending the message', 'error')
-    return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], name=model_name, link=model_links[model_name])
+    return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], nnet_library=nnet_library, 
+                            library_link=library_links[nnet_library], name=model_name, link=model_links[model_name])
 
 
 install_secret_key(app)

@@ -12,6 +12,9 @@ services:
       - LETSENCRYPT_HOST=christianunterrainer.com
       - VIRTUAL_HOST=christianunterrainer.com
       - VIRTUAL_PORT=8080
+      - NGINX_WEB=nginx-web
+      - DOCKER_GEN=nginx-gen
+      - LETS_ENCRYPT=nginx-letsencrypt
 
   nginx-web:
     image: nginx
