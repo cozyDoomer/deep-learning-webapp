@@ -5,8 +5,8 @@ from flask import Flask, render_template, current_app, request, flash
 from flask_mail import Mail, Message
 from forms import EmailForm
 
-from pytorch_classifier import image_classifier
-#from fastai_classifier import image_classifier
+#from pytorch_classifier import image_classifier
+from fastai_classifier import image_classifier
 
 #from werkzeug.contrib.profiler import ProfilerMiddleware
 
@@ -22,7 +22,8 @@ app.register_blueprint(cv)
 model_links = {
   'pnasnet5': 'https://arxiv.org/pdf/1712.00559.pdf',
   'resnet152': 'https://arxiv.org/pdf/1512.03385.pdf',
-  'resnet50': 'https://arxiv.org/pdf/1512.03385.pdf'
+  'resnet50': 'https://arxiv.org/pdf/1512.03385.pdf',
+  'inceptionresnetv2': 'https://arxiv.org/pdf/1602.07261.pdf'
 }
 
 

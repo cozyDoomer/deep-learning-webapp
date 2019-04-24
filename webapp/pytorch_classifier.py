@@ -1,6 +1,6 @@
 #!/venv/bin python
 
-import os, gc
+import os
 from flask import Flask, Blueprint, current_app, render_template
 
 from torch.nn.functional import softmax
@@ -18,7 +18,8 @@ app = Flask(__name__)
 model_links = {
   'pnasnet5': 'https://arxiv.org/pdf/1712.00559.pdf',
   'resnet152': 'https://arxiv.org/pdf/1512.03385.pdf',
-  'resnet50': 'https://arxiv.org/pdf/1512.03385.pdf'
+  'resnet50': 'https://arxiv.org/pdf/1512.03385.pdf',
+  'inceptionresnetv2': 'https://arxiv.org/pdf/1602.07261.pdf'
 }
 
 def init_model(model_name):
@@ -78,8 +79,7 @@ def analyze(filename):
     with open(os.path.join(current_app.config['IMAGENET_FOLDER'], 'imagenet_synsets.txt'), 'r') as f:
         synsets = f.readlines()
 
-    # len(synsets)==1001
-    # sysnets[0] == background
+    # create index: class dictionary
     synsets = [x.strip() for x in synsets]
     synsets = [line.split(' ') for line in synsets]
     key_to_classname = {spl[0]:' '.join(spl[1:]) for spl in synsets}
@@ -105,21 +105,12 @@ def analyze(filename):
 
     class_keys = [class_id_to_key[i] for i in idxs] 
     
-    class_names = [', '.join([str(x) for x in key_to_classname[x].split(",", 2)[:2]]) for x in class_keys]
+    class_names = [', '.join([str(y) for y in key_to_classname[x].split(",", 2)[:2]]) for x in class_keys]
 
     percent = (preds_sorted[:3].numpy() * 100).round(decimals=2)
     
-    print(class_names) 
-    print(percent)
-
-    model = None 
-    tensor = None
-    synsets = None 
-    output = None 
-    preds_sorted = None
-    idxs = None
-    class_keys = None 
-    gc.collect()
+    print(f'predicted classes: {class_names}') 
+    print(f'confidence: {percent}')
 
     return render_template("image-classifier.html", filename=filename, prediction=class_names, confidence=percent, 
                                                     name=model_name, link=model_link, mail=current_app.config['MAIL_USERNAME'])

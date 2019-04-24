@@ -8,6 +8,8 @@ WORKDIR /home
 # pip libraries
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt 
+RUN pip install http://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
+RUN pip install fastai
 
 # copy files and change execution permission of entrypoint
 COPY webapp webapp
@@ -26,12 +28,15 @@ RUN echo 'downloading image-classifier weights'
 #ENV NNET pnasnet5
 
 # resnet152
-ADD https://download.pytorch.org/models/resnet152-b121ed2d.pth static/weights/resnet152.pth
-ENV NNET resnet152
+#ADD https://download.pytorch.org/models/resnet152-b121ed2d.pth static/weights/resnet152.pth
+#ENV NNET resnet152
 
 # resnet50
 #ADD https://download.pytorch.org/models/resnet50-19c8e357.pth static/weights/resnet50.pth
 #ENV NNET resnet50
+
+# fastai-inceptionresnetv2
+ENV NNET inceptionresnetv2
 
 # alternatively download the weights for one model with the links above 
 # store them in webapp/static/weights/<model>.pth in the local repository 
@@ -52,6 +57,6 @@ USER webapp
 
 EXPOSE 8080
 
-CMD gunicorn -R --max-requests 10 --bind 0.0.0.0:8080 --timeout 300 main:app 
+CMD gunicorn -R --max-requests 20 --bind 0.0.0.0:8080 --timeout 300 main:app 
 
 #ENTRYPOINT ["./boot.sh"] 

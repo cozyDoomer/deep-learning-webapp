@@ -12,3 +12,4 @@ etc/nginx/certs/**
 *.pdf
 
 *.pth
+*.pkl

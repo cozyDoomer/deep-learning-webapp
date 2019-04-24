@@ -1,4 +1,5 @@
-- fix nginx configuration for image classifier
+- save fastai modelweights (inceptionresnetv2) without pretrainedmodels and metric dependency
 
-- when trying to send message through frontend:
-  - connect() failed (111: Connection refused) while connecting to upstream
+- test fastai classifier on google cloud compute instance
+
+- update readme for docker-compose and nginx changes

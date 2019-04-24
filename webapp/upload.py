@@ -1,6 +1,6 @@
 #!/venv/bin python
 
-import os, gc
+import os
 from flask import Flask, flash, request, redirect, url_for, Blueprint, current_app, render_template, send_from_directory
 
 from werkzeug.utils import secure_filename
@@ -47,14 +47,10 @@ def preprocess_image(filepath, min_size=299):
     ratio = max(min_size/img.width, min_size/img.height)
     img.thumbnail((img.width * ratio, img.height * ratio), Image.ANTIALIAS)
     
+    print(f'resized image: {img.size}')
     if exif_bytes:
         img.save(filepath, exif=exif_bytes)
     img.save(filepath)
-    print(f'resized image: {img.size}')
-    img = None
-    exif_bytes = None
-    exif_dict = None
-    gc.collect()
     
 @upload.route('/upload', methods=['POST', 'GET'])
 
@@ -75,10 +71,6 @@ def upload_file():
             filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
             preprocess_image(filepath, min_size=299)
-
-            file = None 
-            filepath = None
-            gc.collect()
 
             return render_template("image-classifier.html", filename=filename, mail=current_app.config['MAIL_USERNAME']) 
 
