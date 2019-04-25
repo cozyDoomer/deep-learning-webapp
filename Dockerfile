@@ -7,9 +7,8 @@ WORKDIR /home
 
 # pip libraries
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt 
 RUN pip install http://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
-RUN pip install fastai
+RUN pip install -r requirements.txt --no-deps
 
 # copy files and change execution permission of entrypoint
 COPY webapp webapp

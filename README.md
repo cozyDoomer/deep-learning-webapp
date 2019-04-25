@@ -42,6 +42,9 @@ git clone https://github.com/DollofCuty/deep-learning-webapp.git
     - also follow the section 'Making an alias to Docker Compose' to shorten the commands for the future
 
 ```
+docker network create webproxy
+```
+```
 docker-compose up
 ```
 
@@ -49,6 +52,21 @@ The first time you run this will take some time because it has to build all the 
 and then nginx-letsencrypt will request a certificate
 
 If all went well the webservice should use nginx and the letsencrypt certificate to run on https, with reverse proxy and serving static files
+
+### updating the docker-compose setup (when you change the Dockerfile for example)
+
+```
+docker-compose build
+```
+
+### freeing disk space if you have dangling/unnecassary images (this removes all unused images!)
+
+for reference look at the [docker docs](https://docs.docker.com/engine/reference/commandline/system_prune/)
+
+```
+docker system prune -a
+```
+
 
 ## With docker (Linux, Mac, Windows)
 
