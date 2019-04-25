@@ -37,7 +37,7 @@ RUN echo 'downloading image-classifier weights'
 #ENV NNETLIBRARY pytorch
 
 # fastai-inceptionresnetv2
-#ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/inceptionresnetv2.pkl static/weights/inceptionresnetv2.pkl
+ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/inceptionresnetv2.pkl static/weights/inceptionresnetv2.pkl
 ENV NNET inceptionresnetv2
 ENV NNETLIBRARY fastai
 
