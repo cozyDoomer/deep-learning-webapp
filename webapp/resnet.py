@@ -5,15 +5,6 @@ import torch.utils.model_zoo as model_zoo
 
 __all__ = ['ResNet','resnet50', 'resnet152']
 
-weights = {
-    'resnet50': {
-        'path': 'static/weights/resnet50.pth',
-    },
-    'resnet152': {
-        'path': 'static/weights/resnet152.pth',
-    }
-}
-
 
 pretrained_settings = {
     'resnet50': {

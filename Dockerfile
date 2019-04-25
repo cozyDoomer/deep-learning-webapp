@@ -32,14 +32,14 @@ RUN echo 'downloading image-classifier weights'
 #ENV NNET resnet152
 
 # resnet50
-ADD https://download.pytorch.org/models/resnet50-19c8e357.pth static/weights/resnet50.pth
-ENV NNET resnet50
-ENV NNETLIBRARY pytorch
+#ADD https://download.pytorch.org/models/resnet50-19c8e357.pth static/weights/resnet50.pth
+#ENV NNET resnet50
+#ENV NNETLIBRARY pytorch
 
 # fastai-inceptionresnetv2
 #ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/inceptionresnetv2.pkl static/weights/inceptionresnetv2.pkl
-#ENV NNET inceptionresnetv2
-#ENV NNETLIBRARY fastai
+ENV NNET inceptionresnetv2
+ENV NNETLIBRARY fastai
 
 # alternatively download the weights for one model with the links above 
 # store them in webapp/static/weights/<model>.pth in the local repository 

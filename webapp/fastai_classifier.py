@@ -5,7 +5,7 @@ from flask import Flask, Blueprint, current_app, render_template
 import numpy as np
 
 from fastai.vision import *
-import pretrainedmodels
+from inceptionresnet import inceptionresnetv2
 
 image_classifier = Blueprint('image_classifier', __name__)
 
@@ -15,12 +15,7 @@ model_links = {
   'inceptionresnetv2':  'https://arxiv.org/pdf/1712.00559.pdf'
 }
 
-def top_5_accuracy(input, targs, k=5):
-  return top_k_accuracy(input, targs, k)
-
 def init_learner(model_name):
-  thismodule = sys.modules['__main__']
-  setattr(thismodule, 'top_5_accuracy', top_5_accuracy)
   learn = load_learner(path='static/weights/', file='inceptionresnetv2.pkl')
   return learn
 
