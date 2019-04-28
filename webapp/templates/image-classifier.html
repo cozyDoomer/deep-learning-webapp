@@ -10,9 +10,7 @@
       {% if not filename %} 
       
       <p class="center hide-small"><em>Choose an image to run inference of a       
-
-        <a href="{{ link }}">{{  name  }}</a> model trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
-
+      <a href="{{ link }}">{{  name  }}</a> model trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
       <p class="center hide-medium hide-large"><em>Choose an image to run the model!</em></p>
 
       <form class="center" action="{{ url_for('upload.upload_file') }}" method="POST" enctype=multipart/form-data>

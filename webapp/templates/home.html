@@ -8,10 +8,10 @@
   <!-- First Parallax Image with Button -->
   <div class="bgimg-1 display-container opacity-min" id="home">
     <div class="display-middle" style="white-space:nowrap;">
-      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity hide-small">
+      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity margin-top-huge hide-small">
         <span>TRY IMAGE-CLASSIFIER</span> 
       </a>
-      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-small black xlarge wide animate-opacity hide-medium hide-large">
+      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-small black xlarge wide animate-opacity margin-top-huge hide-medium hide-large">
         <span>IMAGE-CLASSIFIER</span> 
       </a>
     </div>
@@ -63,7 +63,7 @@
     <h3 class="center">MY WORK</h3>
     <p class="center">
       <p> This website is using a <a href="http://flask.pocoo.org/">Flask</a> backend and for the frontend I customized a simple bootstrap theme.</p>
-      <p> The demo runs a <a href="{{ library_link }}">{{  nnet_library  }}</a> deep-learning model, 
+      <p> The image-classifier runs a <a href="{{ library_link }}">{{  nnet_library  }}</a> deep-learning model, 
         <a href="{{ link }}">{{  name  }}</a>, trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
       <p> Here are some examples of what I do:</p>
     </p>
@@ -88,12 +88,12 @@
     </div>
 
     <div class="row-padding center section">
-      <button class="button padding-large margin-right light-grey" style="margin-top:64px">
-          <a href="{{ url_for('cv.show') }}" class="button"><i class="fas fa-portrait fb margin-right"></i>SHOW CV</a>
-      </button>
-      <button class="button padding-large light-grey" style="margin-top:64px">
-          <a href="https://github.com/DollofCuty/deep-learning-webapp" class="button"><i class="fab fa-github fb margin-right"></i>GITHUB</a>
-      </button>
+      <a href="{{ url_for('cv.show') }}" class="button padding-large margin-top-huge margin-right-huge light-grey">
+        <i class="fas fa-portrait fb margin-right"></i>SHOW CV
+      </a>
+      <a href="https://github.com/DollofCuty/deep-learning-webapp" class="button padding-large margin-top-huge light-grey">
+        <i class="fab fa-github fb margin-right"></i>GITHUB
+      </a>
     </div>
   </div>
 

@@ -9,7 +9,6 @@ from pnasnet import pnasnet5
 from resnet import resnet50, resnet152
 
 import utils
-import weakref
 
 image_classifier = Blueprint('image_classifier', __name__)
 
