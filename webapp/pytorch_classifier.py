@@ -47,16 +47,13 @@ def show():
 def analyze(filename):
     model_name = get_name()
     model_link = model_links[model_name]
+    print(f'model name: {model_name}') 
 
     if not os.path.isfile(os.path.join(current_app.config['UPLOAD_FOLDER'], filename)):
         print('error, filename not found in static/uploads/<filename>')
         return render_template("image-classifier.html", filename=filename, name=model_name, link=model_link, mail=current_app.config['MAIL_USERNAME'])
 
-    print(model_name) 
-    print(model_link)
-
     model = init_model(model_name)
-
     print('init model successfully')
 
     model.eval()
@@ -64,15 +61,11 @@ def analyze(filename):
     load_img = utils.LoadImage()
     # rescale, center crop, normalize, and others (ex: ToBGR, ToRange255)
     tf_img = utils.TransformImage(model) 
-
-    print('did rescale, normalize')
+    print('rescale, center crop, normalize done')
 
     # 3x600x500 -> 3x299x299 size may differ
     tensor = tf_img(load_img(os.path.join(current_app.config['UPLOAD_FOLDER'], filename)))
-      
     tensor = tensor.unsqueeze(0) # 3x299x299 -> 1x3x299x299
-
-    print('got tensor from image')
 
     # Load Imagenet Synsets
     with open(os.path.join(current_app.config['IMAGENET_FOLDER'], 'imagenet_synsets.txt'), 'r') as f:
@@ -90,7 +83,6 @@ def analyze(filename):
 
     # Make predictions
     output = model(tensor) # size(1, 1000)
-
     print('prediction done')
 
     # Softmax to get confidence summing up to 1
@@ -103,9 +95,7 @@ def analyze(filename):
     idxs = idxs.numpy()[:3]
 
     class_keys = [class_id_to_key[i] for i in idxs] 
-    
     class_names = [', '.join([str(y) for y in key_to_classname[x].split(",", 2)[:2]]) for x in class_keys]
-
     percent = (preds_sorted[:3].numpy() * 100).round(decimals=2)
     
     print(f'predicted classes: {class_names}') 

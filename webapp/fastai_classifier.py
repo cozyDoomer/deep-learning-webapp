@@ -38,20 +38,16 @@ def show():
 def analyze(filename):
     model_name = get_name()
     model_link = get_link(model_name)
+    print(f'model name: {model_name}') 
     
     if not os.path.isfile(os.path.join(current_app.config['UPLOAD_FOLDER'], filename)):
         print('error, filename not found in static/uploads/<filename>')
         return render_template("image-classifier.html", filename=filename, name=model_name, link=model_link, mail=current_app.config['MAIL_USERNAME'])
 
-    print(model_name) 
-    print(model_link)
-
     learn = init_learner(model_name)
-
     print('init model successfully')
 
     _, _, preds = learn.predict(open_image(os.path.join(current_app.config['UPLOAD_FOLDER'], filename)))
-
     print('prediction done')
 
     # Load Imagenet Synsets
@@ -75,9 +71,7 @@ def analyze(filename):
     idxs = idxs.numpy()[:3]
 
     class_keys = [class_id_to_key[i] for i in idxs] 
-    
     class_names = [', '.join([str(y) for y in key_to_classname[x].split(",", 2)[:2]]) for x in class_keys]
-
     percent = (preds_sorted[:3].numpy() * 100).round(decimals=2)
     
     print(f'predicted classes: {class_names}') 
