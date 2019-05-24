@@ -1,3 +1,3 @@
-- save fastai modelweights (inceptionresnetv2) without pretrainedmodels and metric dependency
+- finish and include object detection model
 
-- test fastai classifier on google cloud compute instance
+- write a better frontend 
