@@ -22,23 +22,33 @@ RUN head -c 24 /dev/urandom > instance/secret_key
 # download the weights for pnasnet5 from github release
 RUN echo 'downloading image-classifier weights'
 
-# pnasnet5, requires quite some ram and cpu
+# Image Classification
+
+# Pytorch
+#ENV CLASSIFICATION-LIBRARY pytorch
+
+# pnasnet-5, requires quite some ram and cpu
 #ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/pnasnet5.pth static/weights/pnasnet5.pth
 #ENV NNET pnasnet5
 
-# resnet152
+# Resnet-152
 #ADD https://download.pytorch.org/models/resnet152-b121ed2d.pth static/weights/resnet152.pth
 #ENV NNET resnet152
 
-# resnet50
+# Resnet-50
 #ADD https://download.pytorch.org/models/resnet50-19c8e357.pth static/weights/resnet50.pth
 #ENV NNET resnet50
-#ENV NNETLIBRARY pytorch
 
-# fastai-inceptionresnetv2
+# fastai 
+ENV CLASSIFICATION-LIBRARY fastai
+
+# Inception-Resnetv2
 ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/inceptionresnetv2.pkl static/weights/inceptionresnetv2.pkl
 ENV NNET inceptionresnetv2
-ENV NNETLIBRARY fastai
+
+# Object Detection
+# Resnet-34
+#ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/inceptionresnetv2.pkl static/weights/resnet34_bbox.pkl
 
 # alternatively download the weights for one model with the links above 
 # store them in webapp/static/weights/<model>.pth in the local repository 

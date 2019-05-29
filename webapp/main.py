@@ -7,8 +7,8 @@ from forms import EmailForm
 
 #from werkzeug.contrib.profiler import ProfilerMiddleware
 
-# import classifier depending on environment variable set in Dockerfile and 
-nnet_library = os.getenv('NNETLIBRARY', 'fastai')
+# import classifier depending on environment variable set in Dockerfile 
+nnet_library = os.getenv('CLASSIFICATION-LIBRARY', 'fastai')
 if nnet_library == 'pytorch':
     from pytorch_classifier import image_classifier
 elif nnet_library == 'fastai':
@@ -85,7 +85,7 @@ def send_message():
         app.config.from_object('email_conf.Config')
         mail = Mail(app)
         msg = Message(sender = current_app.config['MAIL_USERNAME'], recipients = [current_app.config['MAIL_USERNAME']], 
-                      subject= f'message from {form.name.data} through website')
+                      subject = f'message from {form.name.data} through website')
         mail.body = form.message.data
         msg.html = f'{form.email_field.data}<br>{mail.body}'
         mail.send(msg)

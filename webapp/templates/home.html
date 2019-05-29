@@ -9,10 +9,10 @@
   <div class="bgimg-1 display-container opacity-min" id="home">
     <div class="display-middle" style="white-space:nowrap;">
       <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity margin-top-huge hide-small">
-        <span>TRY IMAGE-CLASSIFIER</span> 
+        <span>TRY IMAGE CLASSIFIER</span> 
       </a>
       <a href="{{ url_for('image_classifier.show') }}" class="button center padding-small black xlarge wide animate-opacity margin-top-huge hide-medium hide-large">
-        <span>IMAGE-CLASSIFIER</span> 
+        <span>IMAGE CLASSIFIER</span> 
       </a>
     </div>
   </div>
@@ -33,7 +33,7 @@
           <p>Over time I have gained experience in agile development, best practices (eg. git, virtualenv, unit-testing, docker) 
              and various programming languages.</p>
           <p>In the last year I spent a lot of time working on machine-learning tasks, for structured and unstructured data
-             using PyTorch and fast.ai combined with more data focused libraries like pandas, and numpy in Python.</p>
+             using PyTorch and fast.ai combined with more data focused libraries like pandas, numpy in Python.</p>
       </div>
     </div>
     <p class="large center padding-16">Im really good at:</p>
@@ -62,10 +62,20 @@
   <div class="content container padding-64" id="portfolio">
     <h3 class="center">MY WORK</h3>
     <p class="center">
-      <p> This website is using a <a href="http://flask.pocoo.org/">Flask</a> backend and for the frontend I customized a simple bootstrap theme.</p>
-      <p> The image-classifier runs a <a href="{{ library_link }}">{{  nnet_library  }}</a> deep-learning model, 
-        <a href="{{ link }}">{{  name  }}</a>, trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
-      <p> Here are some examples of what I do:</p>
+      <p> I have job experience in the fields of Web development, ERP development and UI development. </p>
+      <p> In each of those topics I read into existing code, built features, fixed bugs and refactored code. </p>
+      <p> Over the past year I spent a good portion of my free time to get into machine learning and computer vision and after some months 
+          I started to have decent success in multiple <a href="https://www.kaggle.com/dollofcuty/competitions/">Kaggle Competitions</a> 
+          with very different datasets. </p>
+      <br>
+      <p> This website was a little project combining my web development skills with Python computer vision models I've trained. </p>
+      <p> I made open source in this <a href="https://github.com/DollofCuty/deep-learning-webapp/">github repo</a>. </p>
+      <p> The frontend is a simple html/css template with minimal javascript and the backend is written in <a href="http://flask.pocoo.org/">Flask</a>.</p>
+      <p> The image classifier uses a <a href="{{ link }}">{{  name  }}</a> deep-learning model written with the 
+        <a href="{{ library_link }}">{{  nnet_library  }}</a> library and the object detection is done with a
+        <a href="https://arxiv.org/pdf/1708.02002.pdf/">RetinaNet and Focal Loss</a> implementation, 
+        both trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
+      <p> Here are some random screenshots of what I do:</p>
     </p>
     <br>
     <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->

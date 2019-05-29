@@ -16,11 +16,12 @@ model_links = {
 }
 
 def init_learner(model_name):
-  learn = load_learner(path='static/weights/', file='inceptionresnetv2.pkl')
-  return learn
+    learn = load_learner(path='static/weights/', file='inceptionresnetv2.pkl')
+    return learn
 
 def get_name():
-    return os.getenv('NNET', 'inceptionresnetv2') # inceptionresnetv2 default for fastai
+    # inceptionresnetv2 default for fastai classification
+    return os.getenv('NNET', 'inceptionresnetv2') 
 
 def get_link(model_name):
     return model_links[model_name]
