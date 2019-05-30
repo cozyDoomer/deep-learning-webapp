@@ -21,7 +21,7 @@
   <div class="content container padding-64" id="about">
     <h3 class="center">ABOUT ME</h3>
     <p class="center"><em>I love programming</em></p>
-    <p></p>
+    <div class="hide-small"><br><br></div>
     <div class="row">
       <div class="col m6 center padding-large">
         <p><b><i class="fa fa-user margin-right"></i>Christian Unterrainer</b></p><br>
@@ -36,6 +36,7 @@
              using PyTorch and fast.ai combined with more data focused libraries like pandas, numpy in Python.</p>
       </div>
     </div>
+    <div class="hide-small"><br><br></div>
     <p class="large center padding-16">Im really good at:</p>
     <p class="wide"><i class="fa fa-laptop"></i>Software Development</p>
     <div   class="light-grey">
@@ -61,20 +62,21 @@
   <!-- Container (Portfolio Section) -->
   <div class="content container padding-64" id="portfolio">
     <h3 class="center">MY WORK</h3>
+    <br>
     <p class="center">
-      <p> I have job experience in the fields of Web development, ERP development and UI development. </p>
-      <p> In each of those topics I read into existing code, built features, fixed bugs and refactored code. </p>
-      <p> Over the past year I spent a good portion of my free time to get into machine learning and computer vision and after some months 
+      <p class="center"> I have job experience in the fields of Web development, ERP development and UI development. </p>
+      <p class="center"> In each of those topics I read into existing code, built features, fixed bugs and refactored code. </p>
+      <p class="center"> Over the past year I spent a good portion of my free time to get into machine learning and computer vision and after some months 
           I started to have decent success in multiple <a href="https://www.kaggle.com/dollofcuty/competitions/">Kaggle Competitions</a> 
           with very different datasets. </p>
       <br>
-      <p> This website was a little project combining my web development skills with Python computer vision models I've trained. </p>
-      <p> I made open source in this <a href="https://github.com/DollofCuty/deep-learning-webapp/">github repo</a>. </p>
-      <p> The frontend is a simple html/css template with minimal javascript and the backend is written in <a href="http://flask.pocoo.org/">Flask</a>.</p>
-      <p> The image classifier uses a <a href="{{ link }}">{{  name  }}</a> deep-learning model written with the 
-        <a href="{{ library_link }}">{{  nnet_library  }}</a> library and the object detection is done with a
+      <p class="hide-small center"> This website is a little project combining my web development skills with Python computer vision models I've trained. </p>
+      <p class="hide-small center"> You can refer to this <a href="https://github.com/DollofCuty/deep-learning-webapp/">github repo</a> for more information, an installation guide and the code. </p>
+      <p class="hide-small center"> The image classifier uses a <a href="{{ link }}">{{  name  }}</a> deep-learning model written with the 
+        <a href="{{ library_link }}">{{  nnet_library  }}</a> library and the object detection is done with an 
         <a href="https://arxiv.org/pdf/1708.02002.pdf/">RetinaNet and Focal Loss</a> implementation, 
         both trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
+      <br>
       <p> Here are some random screenshots of what I do:</p>
     </p>
     <br>
@@ -97,8 +99,17 @@
       </div>
     </div>
 
-    <div class="row-padding center section">
+    <div class="row-padding center section hide-small">
       <a href="{{ url_for('cv.show') }}" class="button padding-large margin-top-huge margin-right-large light-grey">
+        <i class="fas fa-portrait fb margin-right"></i>SHOW CV
+      </a>
+      <a href="https://github.com/DollofCuty/deep-learning-webapp" class="button padding-large margin-top-huge light-grey">
+        <i class="fab fa-github fb margin-right"></i>GITHUB
+      </a>
+    </div>
+
+    <div class="row-padding center section hide-medium hide-large">
+      <a href="{{ url_for('cv.show') }}" class="button padding-large margin-top-huge margin-right light-grey">
         <i class="fas fa-portrait fb margin-right"></i>SHOW CV
       </a>
       <a href="https://github.com/DollofCuty/deep-learning-webapp" class="button padding-large margin-top-huge light-grey">
@@ -125,9 +136,9 @@
 
   <!-- Container (Contact Section) -->
   <div class="content container padding-64" id="contact">
-    <h3 class="center">WHERE I WORK</h3>
-    <p class="center"><em>I'm currently looking for work</em></p>
-    <p class="center"><em>.. and I'd like to hear from you!</em></p>
+    <h3 class="center">CONTACT ME</h3>
+    <p class="center"><em>I'd like to hear from you!</em></p>
+    <p class="center"><em>.. I'm also looking for work/projects</em></p>
 
     <div class="row padding-32 section">
       <div class="large margin-bottom">

@@ -52,9 +52,9 @@ def preprocess_image(filepath, min_size=299):
         img.save(filepath, exif=exif_bytes)
     img.save(filepath)
     
-@upload.route('/upload', methods=['POST', 'GET'])
+@upload.route('/upload/<reason>', methods=['POST', 'GET'])
 
-def upload_file():
+def upload_file(reason):
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -71,14 +71,13 @@ def upload_file():
             filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
             preprocess_image(filepath, min_size=299)
+            return render_template(f'{reason}.html', filename=filename, mail=current_app.config['MAIL_USERNAME'])
 
-            return render_template("image-classifier.html", filename=filename, mail=current_app.config['MAIL_USERNAME']) 
+    return render_template(f'{reason}.html', error='error', mail=current_app.config['MAIL_USERNAME'])
 
-    return render_template("image-classifier.html", error='error', mail=current_app.config['MAIL_USERNAME']) 
+@upload.route('/upload/<reason>/<filename>', methods=['GET'])
 
-@upload.route('/upload/<filename>', methods=['GET'])
-
-def send_file(filename):
+def send_file(reason, filename):
     if request.method=='GET':
         return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
-    return render_template("image-classifier.html", error='error', mail=current_app.config['MAIL_USERNAME']) 
+    return render_template(f'{reason}.html', error='error', mail=current_app.config['MAIL_USERNAME'])

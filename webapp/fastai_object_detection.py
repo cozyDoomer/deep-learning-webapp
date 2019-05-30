@@ -50,7 +50,7 @@ def analyze(filename):
 
     learn = init_learner(model_name)
     print('init model successfully')
-
+    print(learn)
     # TODO: predict with retinanet
     print('prediction done')
 

@@ -26,8 +26,9 @@
             <a href="{{ url_for('home') }}#portfolio" class="bar-item button hide-small"><i class="fa fa-th"></i> PORTFOLIO</a>
             <a href="{{ url_for('home') }}#contact" class="bar-item button hide-small"><i class="fa fa-envelope"></i> CONTACT</a>
             <div class="vertical-line hide-small" style="height: 45px;"></div>
-            <a href="{{ url_for('image_classifier.show') }}" class="bar-item button hide-small"><i class="fas fa-laptop-code"></i> CLASSIFIER</a>
             <a href="{{ url_for('cv.show') }}" class="bar-item button hide-small"><i class="fas fa-portrait"></i> CV</a>
+            <a href="{{ url_for('image_classifier.show') }}" class="bar-item button hide-small"><i class="fas fa-laptop-code"></i> CLASSIFIER</a>
+            <a href="{{ url_for('object_detection.show') }}" class="bar-item button hide-small"><i class="fas fa-laptop-code"></i> OBJECT DETECTION</a>
         </div>
     
         <!-- Navbar on small screens -->
@@ -36,8 +37,9 @@
             <a href="{{ url_for('home') }}#portfolio" class="bar-item button" onclick="toggleFunction()">PORTFOLIO</a>
             <a href="{{ url_for('home') }}#contact" class="bar-item button" onclick="toggleFunction()">CONTACT</a>
             <hr class="divider" >
-            <a href="{{ url_for('image_classifier.show') }}" class="bar-item button" onclick="toggleFunction()">CLASSIFIER</a>
             <a href="{{ url_for('cv.show') }}"  class="bar-item button" onclick="toggleFunction()">CV</a>
+            <a href="{{ url_for('image_classifier.show') }}" class="bar-item button" onclick="toggleFunction()">CLASSIFIER</a>
+            <a href="{{ url_for('object_detection.show') }}" class="bar-item button" onclick="toggleFunction()">OBJECT DETECTION</a>
             <hr class="divider" >
         </div>
     </div>

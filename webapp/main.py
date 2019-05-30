@@ -5,7 +5,9 @@ from flask import Flask, render_template, current_app, request, flash
 from flask_mail import Mail, Message
 from forms import EmailForm
 
-#from werkzeug.contrib.profiler import ProfilerMiddleware
+from fastai_object_detection import object_detection
+from upload import upload
+from cv import cv
 
 # import classifier depending on environment variable set in Dockerfile 
 nnet_library = os.getenv('CLASSIFICATION-LIBRARY', 'fastai')
@@ -14,14 +16,12 @@ if nnet_library == 'pytorch':
 elif nnet_library == 'fastai':
     from fastai_classifier import image_classifier
 
-from upload import upload
-from cv import cv
-
 app = Flask(__name__)
 
-app.register_blueprint(image_classifier)
 app.register_blueprint(upload)
 app.register_blueprint(cv)
+app.register_blueprint(image_classifier)
+app.register_blueprint(object_detection)
 
 model_links = {
   'pnasnet5': 'https://arxiv.org/pdf/1712.00559.pdf',
@@ -101,13 +101,4 @@ def send_message():
 install_secret_key(app)
 
 if __name__ == '__main__':
-    # heroku loggin:
-    #stream_handler = logging.StreamHandler()
-    #stream_handler.setLevel(logging.INFO)
-    #app.logger.addHandler(stream_handler)
-
-    # for profiling:
-    #app.config['PROFILE'] = True
-    #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
-
     app.run(debug=False, host='0.0.0.0', port=8080)
