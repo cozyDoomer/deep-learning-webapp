@@ -18,11 +18,11 @@
            <input type=submit> 
       </form>
 
-      {% if error %}
-      <p class="center"><em>Oops, there was an {{error}}</em></p>
-      {% endif %}
-
       {% else %} <!-- if filename-->
+
+      {% if error %}
+      <p class="center"><em>{{error}}</em></p>
+      {% endif %}
 
       {% if not prediction %} 
 
