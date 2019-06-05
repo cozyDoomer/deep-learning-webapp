@@ -70,7 +70,10 @@ def upload_file(reason):
             filename = secure_filename(file.filename)
             filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
-            preprocess_image(filepath, min_size=299)
+            size = 299
+            if reason=='object-detection':
+                size = 500
+            preprocess_image(filepath, min_size=size)
             return render_template(f'{reason}.html', filename=filename, mail=current_app.config['MAIL_USERNAME'])
 
     return render_template(f'{reason}.html', error='error', mail=current_app.config['MAIL_USERNAME'])

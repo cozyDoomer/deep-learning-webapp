@@ -1,6 +1,7 @@
 import numpy as np
 from fastai import *
 from fastai.vision import *
+from PIL import Image as PILImage, ImageDraw, ImageFont
 
 
 def create_anchors(sizes, ratios, scales, flatten=True):
@@ -304,3 +305,47 @@ def show_anchors_on_images(data, anchors, figsize=(15,15)):
 
 
     return np.array(all_boxes), np.array(all_labels)
+
+def draw_bbox_on_orig(original_image_path, transformed_image, scores, bbox_preds, class_names):
+    """map the predicted bounding box on the original image and draw it"""
+    # get proportion to the original image to rescale bbox
+    img = PILImage.open(original_image_path)
+    img_width, img_height = img.size
+    tfm_image_width, tfm_image_height = transformed_image.size
+    x_prop = img_width / tfm_image_width
+    y_prop = img_height / tfm_image_height
+    print(f'bbox proportions to original: x={x_prop}, y={y_prop}')
+
+    draw = ImageDraw.Draw(img)
+    fnt = ImageFont.truetype("static/fonts/calibrib.ttf", img_height//30)
+    for score, bbox_pred, class_name in zip(scores, bbox_preds, class_names): 
+        bbox_pred[0], bbox_pred[1], bbox_pred[2], bbox_pred[3] = bbox_pred[1], bbox_pred[0], bbox_pred[3], bbox_pred[2]
+        # change from y0, x0, width, length to y0, x0, y1, x1
+        bbox_pred[2:] = bbox_pred[2:] + bbox_pred [:2]
+        # resize to original image
+        bbox_pred[::2]  = [x_prop*x for x in bbox_pred[::2]]
+        bbox_pred[1::2] = [y_prop*y for y in bbox_pred[1::2]]
+        print(f'bbox on original size: {bbox_pred}')
+        draw.text((bbox_pred[0] + 3, bbox_pred[1] + 3), f'{score*100:.2f}% {class_name}',       (0,0,0), font=fnt)
+        draw.text((bbox_pred[0] + 5, bbox_pred[1] + 3), f'{score*100:.2f}% {class_name}',       (0,0,0), font=fnt)
+        draw.text((bbox_pred[0] + 5, bbox_pred[1] + 5), f'{score*100:.2f}% {class_name}',       (0,0,0), font=fnt)
+        draw.text((bbox_pred[0] + 3, bbox_pred[1] + 5), f'{score*100:.2f}% {class_name}',       (0,0,0), font=fnt)
+        draw.text((bbox_pred[0] + 4, bbox_pred[1] + 4), f'{score*100:.2f}% {class_name}', (255,255,255), font=fnt)
+
+        draw.rectangle((bbox_pred[0] - 1, bbox_pred[1] - 1, bbox_pred[2] + 1, bbox_pred[3] + 1), outline='black', width = 4)
+        draw.rectangle((bbox_pred[0],     bbox_pred[1],     bbox_pred[2],     bbox_pred[3]),     outline='white', width = 2)
+
+    return img
+
+def filter_predictions(tfm_image, classes, bboxes, anchors, thresh = 0.3):
+    """filter predictions starting with certain threshold and lower it until at least 1 prediction is valid"""
+    bbox_preds, scores, preds = process_output(classes, bboxes, anchors, detect_thresh=thresh)
+    while bbox_preds is None:
+        thresh -= 0.05
+        print(f'lowering threshold to: {thresh}')
+        bbox_preds, scores, preds = process_output(classes, bboxes, anchors, detect_thresh=thresh)
+    
+    to_keep = nms(bbox_preds, scores, 0.1)
+    bbox_preds, preds, scores = bbox_preds[to_keep].cpu(), preds[to_keep].cpu(), scores[to_keep].cpu()
+    t_sz = torch.Tensor([*tfm_image.size])[None].cpu()
+    return to_np(rescale_boxes(bbox_preds, t_sz)), preds, scores

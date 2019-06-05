@@ -17,6 +17,7 @@ model_links = {
 
 def init_learner(model_name):
     learn = load_learner(path='static/weights/', file='inceptionresnetv2.pkl', device='cpu')
+    learn.model = learn.model.eval()
     return learn
 
 def get_name():
@@ -37,9 +38,6 @@ def show():
 @image_classifier.route("/image-classifier/<filename>")
 
 def analyze(filename):
-    '''
-    TODO: export model in fastai 1.0.52, pytorch 1.1.0 to have classifier and object detection on same version
-    '''
     model_name = get_name()
     model_link = get_link(model_name)
     print(f'model name: {model_name}') 

@@ -1,7 +1,7 @@
 /virtual_env
 
 webapp/instance
-webapp/__pycache__
+__pycache__/
 webapp/static/conf/email.csv
 
 etc/html/**

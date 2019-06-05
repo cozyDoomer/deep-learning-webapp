@@ -9,8 +9,8 @@
 
       {% if not filename %} 
       
-      <p class="center hide-small"><em>Choose an image to run inference of a       
-      <a href="{{ link }}">{{  name  }}</a> model trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
+      <p class="center hide-small"><em>Choose an image to run inference of a <a href="https://arxiv.org/pdf/1708.02002.pdf">RetinaNet</a>
+       model with <a href="{{ link }}">{{  name  }}</a> backbone trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
       <p class="center hide-medium hide-large"><em>Choose an image to run the model!</em></p>
 
       <form class="center" action="{{ url_for('upload.upload_file', reason='object-detection') }}" method="POST" enctype=multipart/form-data>
@@ -20,11 +20,11 @@
 
       {% else %} <!-- if filename-->
 
-      {% if error %}
-      <p class="center"><em>{{error}}</em></p>
-      {% endif %}
+      {% if prediction %} 
+    
+      <p class="center"><em>Results</em></p>
 
-      {% if not prediction %} 
+      {% else %} 
 
       <p class="center"><em>This will take 5-10 seconds!</em></p>
 
@@ -41,12 +41,13 @@
       {% endif %}
 
       <div class="center hide-small">
-        <img src="{{ url_for('upload.send_file', reason='object-detection', filename=filename) }}" class="image" style="max-height:300px">
+        <img src="{{ url_for('upload.send_file', reason='object-detection', filename=filename) }}" class="image" style="max-height:500px">
       </div>
 
       <div class="center hide-medium hide-large">
-        <img src="{{ url_for('upload.send_file', reason='object-detection', filename=filename) }}" class="image" style="max-height:250px">
+        <img src="{{ url_for('upload.send_file', reason='object-detection', filename=filename) }}" class="image" style="max-height:400px">
       </div>
+
       {% endif %}
 
       {% if prediction %}
