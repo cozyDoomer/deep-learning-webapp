@@ -17,7 +17,7 @@ model_links = {
 }
 
 def init_learner(model_name):
-    learn = load_learner(path='static/weights/', file='resnet34_bbox.pkl', device='cpu')
+    learn = load_learner(path='static/weights/', file='retinanet_resnet34.pkl', device='cpu')
     learn.model = learn.model.eval()
     return learn
 

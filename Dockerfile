@@ -46,9 +46,10 @@ ENV CLASSIFICATION-LIBRARY fastai
 ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/inceptionresnetv2.pkl static/weights/inceptionresnetv2.pkl
 ENV NNET inceptionresnetv2
 
+
 # Object Detection
-# Resnet-34
-#ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/inceptionresnetv2.pkl static/weights/resnet34_bbox.pkl
+# RetinaNet with ResNet-34 backbone
+ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/retinanet_resnet34.pkl static/weights/retinanet_resnet34.pkl
 
 # alternatively download the weights for one model with the links above 
 # store them in webapp/static/weights/<model>.pth in the local repository 
