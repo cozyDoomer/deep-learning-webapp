@@ -7,7 +7,7 @@ WORKDIR /home
 
 # pip libraries
 COPY requirements.txt requirements.txt
-RUN pip3 install torch torchvision
+RUN pip install torch torchvision
 RUN pip install -r requirements.txt --no-deps
 
 # copy files and change execution permission of entrypoint
