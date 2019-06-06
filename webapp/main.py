@@ -10,7 +10,9 @@ from upload import upload
 from cv import cv
 
 # import classifier depending on environment variable set in Dockerfile 
-nnet_library = os.getenv('CLASSIFICATION-LIBRARY', 'fastai')
+model_name = os.getenv('NNET', 'resnet50')
+nnet_library = os.getenv('CLASSIFICATIONLIBRARY', 'fastai')
+
 if nnet_library == 'pytorch':
     from pytorch_classifier import image_classifier
 elif nnet_library == 'fastai':

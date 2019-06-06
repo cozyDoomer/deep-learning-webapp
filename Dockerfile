@@ -7,7 +7,7 @@ WORKDIR /home
 
 # pip libraries
 COPY requirements.txt requirements.txt
-RUN pip install http://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
+RUN pip3 install torch torchvision
 RUN pip install -r requirements.txt --no-deps
 
 # copy files and change execution permission of entrypoint
@@ -25,7 +25,7 @@ RUN echo 'downloading image-classifier weights'
 # Image Classification
 
 # Pytorch
-#ENV CLASSIFICATION-LIBRARY pytorch
+#ENV CLASSIFICATIONLIBRARY pytorch
 
 # pnasnet-5, requires quite some ram and cpu
 #ADD https://gitreleases.dev/gh/DollofCuty/deep-learning-webapp/latest/pnasnet5.pth static/weights/pnasnet5.pth
