@@ -1,231 +1,239 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141674173-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-141674173-1');
+    </script>
+</head>
+
 <body>
-  {% extends "template.html" %}
-  {% block content %}
+    {% extends "template.html" %} {% block content %}
 
-  <!-- First Parallax Image with Button -->
-  <div class="bgimg-1 display-container opacity-min" id="home">
-    <div class="display-middle" style="white-space:nowrap;">
-      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity margin-top-huge hide-small">
-        <span>TRY IMAGE CLASSIFIER</span> 
-      </a>
-      <a href="{{ url_for('image_classifier.show') }}" class="button center padding-small black xlarge wide animate-opacity margin-top-huge hide-medium hide-large">
-        <span>IMAGE CLASSIFIER</span> 
-      </a>
-    </div>
-    <div class="display-middle-lower" style="white-space:nowrap;">
-      <a href="{{ url_for('object_detection.show') }}" class="button center padding-large black xlarge wide animate-opacity hide-small">
-        <span>TRY OBJECT DETECTION</span> 
-      </a>
-      <a href="{{ url_for('object_detection.show') }}" class="button center padding-small black xlarge wide animate-opacity hide-medium hide-large">
-        <span>OBJECT DETECTION</span> 
-      </a>
-    </div>
-  </div>
-
-  <!-- Container (About Section) -->
-  <div class="content container padding-64" id="about">
-    <h3 class="center">ABOUT ME</h3>
-    <p class="center"><em>I love programming</em></p>
-    <div class="hide-small"><br><br></div>
-    <div class="row">
-      <div class="col m6 center padding-large">
-        <p><b><i class="fa fa-user margin-right"></i>Christian Unterrainer</b></p><br>
-        <img src="/static/images/me.jpg" class="round image" alt="Photo of Me" width="200">
-      </div>
-
-      <div class="col m6 padding-large">
-          <p>I started out as software developer graduating from HTL Wiener Neustadt, mostly working with C# and Python.</p>
-          <p>Over time I have gained experience in agile development, best practices (eg. git, virtualenv, unit-testing, docker) 
-             and various programming languages.</p>
-          <p>In the last year I spent a lot of time working on machine-learning tasks, for structured and unstructured data
-             using PyTorch and fast.ai combined with more data focused libraries like pandas, numpy in Python.</p>
-      </div>
-    </div>
-    <div class="hide-small"><br><br></div>
-    <p class="large center padding-16">Im really good at:</p>
-    <p class="wide"><i class="fa fa-laptop"></i>Software Development</p>
-    <div   class="light-grey">
-      <div class="container padding-small dark-grey center" style="width:70%">70%</div>
-    </div>
-    <p class="wide"><i class="fa fa-tasks"></i>Web Development</p>
-    <div class="light-grey">
-      <div class="container padding-small dark-grey center" style="width:55%">55%</div>
-    </div>
-    <p class="wide"><i class="fa fa-flask"></i>Machine Learning</p>
-    <div class="light-grey">
-      <div class="container padding-small dark-grey center" style="width:75%">75%</div>
-    </div>
-  </div>
-
-  <!-- Second Parallax Image with Portfolio Text -->
-  <div class="bgimg-2 display-container opacity-min">
-    <div class="display-middle">
-      <span class="xxxlarge text-white wide">PORTFOLIO</span>
-    </div>
-  </div>
-
-  <!-- Container (Portfolio Section) -->
-  <div class="content container padding-64" id="portfolio">
-    <h3 class="center">MY WORK</h3>
-    <br>
-    <p class="center">
-      <p class="center"> I have job experience in the fields of Web development, ERP development and UI development. </p>
-      <p class="center"> In each of those topics I read into existing code, built features, fixed bugs and refactored code. </p>
-      <p class="center"> Over the past year I spent a good portion of my free time to get into machine learning and computer vision and after some months 
-          I started to have decent success in multiple <a href="https://www.kaggle.com/dollofcuty/competitions/">Kaggle Competitions</a> 
-          with very different datasets. </p>
-      <br>
-      <p class="hide-small center"> This website is a little project combining my web development skills with Python computer vision models I've trained. </p>
-      <p class="hide-small center"> You can refer to this <a href="https://github.com/DollofCuty/deep-learning-webapp/">github repo</a> for more information, an installation guide and the code. </p>
-      <p class="hide-small center"> The image classifier uses a <a href="{{ link }}">{{  name  }}</a> deep-learning model written with the 
-        <a href="{{ library_link }}">{{  nnet_library  }}</a> library and the object detection is done with an 
-        <a href="https://arxiv.org/pdf/1708.02002.pdf/">RetinaNet and Focal Loss</a> implementation, 
-        both trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
-      <br>
-      <p> Here are some random screenshots of what I do:</p>
-    </p>
-    <br>
-    <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
-    <div class="row-padding center">
-      <div class="col m3">
-        <img src="/static/images/work1.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="Training state of the art Machine Learning Models">
-      </div>
-
-      <div class="col m3">
-        <img src="/static/images/work2.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="writing code for Kaggle Competitions">
-      </div>
-
-      <div class="col m3">
-        <img src="/static/images/work3.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="visualizing/interpreting datasets">
-      </div>
-
-      <div class="col m3">
-        <img src="/static/images/work4.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="Experiments with deep-learning">
-      </div>
+    <!-- First Parallax Image with Button -->
+    <div class="bgimg-1 display-container opacity-min" id="home">
+        <div class="display-middle" style="white-space:nowrap;">
+            <a href="{{ url_for('image_classifier.show') }}" class="button center padding-large black xlarge wide animate-opacity margin-top-huge hide-small">
+                <span>TRY IMAGE CLASSIFIER</span>
+            </a>
+            <a href="{{ url_for('image_classifier.show') }}" class="button center padding-small black xlarge wide animate-opacity margin-top-huge hide-medium hide-large">
+                <span>IMAGE CLASSIFIER</span>
+            </a>
+        </div>
+        <div class="display-middle-lower" style="white-space:nowrap;">
+            <a href="{{ url_for('object_detection.show') }}" class="button center padding-large black xlarge wide animate-opacity hide-small">
+                <span>TRY OBJECT DETECTION</span>
+            </a>
+            <a href="{{ url_for('object_detection.show') }}" class="button center padding-small black xlarge wide animate-opacity hide-medium hide-large">
+                <span>OBJECT DETECTION</span>
+            </a>
+        </div>
     </div>
 
-    <div class="row-padding center section hide-small">
-      <a href="{{ url_for('cv.show') }}" class="button padding-large margin-top-huge margin-right-large light-grey">
-        <i class="fas fa-portrait fb margin-right"></i>SHOW CV
-      </a>
-      <a href="https://github.com/DollofCuty" class="button padding-large margin-top-huge light-grey">
-        <i class="fab fa-github fb margin-right"></i>GITHUB
-      </a>
-    </div>
-    
-    <div class="row-padding center section hide-medium hide-large">
-      <a href="{{ url_for('cv.show') }}" class="button padding-large margin-top-huge margin-right light-grey">
-        <i class="fas fa-portrait fb margin-right"></i>SHOW CV
-      </a>
-      <a href="https://github.com/DollofCuty/deep-learning-webapp" class="button padding-large margin-top-huge light-grey">
-        <i class="fab fa-github fb margin-right"></i>GITHUB
-      </a>
-    </div>
-  </div>
-
-  <!-- Modal for full size images on click-->
-  <div id="modal01" class="modal black" onclick="this.style.display='none'">
-    <span class="button large black display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
-    <div class="modal-content animate-zoom center transparent padding-64">
-      <img id="img01" class="image">
-      <p id="caption" class="opacity large"></p>
-    </div>
-  </div>
-
-  <!-- Third Parallax Image with Portfolio Text -->
-  <div class="bgimg-3 display-container opacity-min">
-    <div class="display-middle">
-      <span class="xxxlarge text-white wide">CONTACT</span>
-    </div>
-  </div>
-
-  <!-- Container (Contact Section) -->
-  <div class="content container padding-64" id="contact">
-    <h3 class="center">CONTACT ME</h3>
-    <p class="center"><em>I'd like to hear from you!</em></p>
-    <p class="center"><em>.. I'm also looking for work/projects</em></p>
-
-    <div class="row padding-32 section">
-      <div class="large margin-bottom">
-        <i class="fa fa-map-marker fa-fw hover-text-black xlarge margin-right"></i> Wiener Neustadt, Austria<br>
-        <i class="fa fa-envelope fa-fw hover-text-black xlarge margin-right"></i> Email: {{  mail  }}<br>
-      </div>
-      <p>Write me an e-mail or leave me a note:</p>
-
-      {% from "_formhelpers.html" import render_field %}
-      <form action="{{ url_for('send_message', _anchor='contact') }}" method="POST">
-        <dl>
-          <div class="col-mobile">
-            {{ render_field(form.name, class='input border', placeholder="Name") }}
-          </div>
-          <div class="col-mobile">
-            {{ render_field(form.email_field, class="input border", placeholder="Email Address") }}
-          </div>
-          <div class="row">
-            <div class="margin-top">
-              {{ render_field(form.message, class="input border", placeholder="Message") }}
-            </div>
-          </div> 
-        </dl>
+    <!-- Container (About Section) -->
+    <div class="content container padding-64" id="about">
+        <h3 class="center">ABOUT ME</h3>
+        <p class="center"><em>I love programming</em></p>
+        <div class="hide-small"><br><br></div>
         <div class="row">
-          <div class="col-mobile center padding-large">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-                {% for category, message in messages %}
-                  <div class="message_flash {{ category }} padding-large">{{ message }}</div>
-                {% endfor %}
-              {% endif %}
-            {% endwith %}
-          </div>
-          <div class="col-mobile center padding-large">
-            <button class="button black right section" type="submit">
+            <div class="col m6 center padding-large">
+                <p><b><i class="fa fa-user margin-right"></i>Christian Unterrainer</b></p><br>
+                <img src="/static/images/me.jpg" class="round image" alt="Photo of Me" width="200">
+            </div>
+
+            <div class="col m6 padding-large">
+                <p>I started out as software developer graduating from HTL Wiener Neustadt, mostly working with C# and Python.</p>
+                <p>Over time I have gained experience in agile development, best practices (eg. git, virtualenv, unit-testing, docker) and various programming languages.</p>
+                <p>In the last year I spent a lot of time working on machine-learning tasks, for structured and unstructured data using PyTorch and fast.ai combined with more data focused libraries like pandas, numpy in Python.</p>
+            </div>
+        </div>
+        <div class="hide-small"><br><br></div>
+        <p class="large center padding-16">Im really good at:</p>
+        <p class="wide"><i class="fa fa-laptop"></i>Software Development</p>
+        <div class="light-grey">
+            <div class="container padding-small dark-grey center" style="width:70%">70%</div>
+        </div>
+        <p class="wide"><i class="fa fa-tasks"></i>Web Development</p>
+        <div class="light-grey">
+            <div class="container padding-small dark-grey center" style="width:55%">55%</div>
+        </div>
+        <p class="wide"><i class="fa fa-flask"></i>Machine Learning</p>
+        <div class="light-grey">
+            <div class="container padding-small dark-grey center" style="width:75%">75%</div>
+        </div>
+    </div>
+
+    <!-- Second Parallax Image with Portfolio Text -->
+    <div class="bgimg-2 display-container opacity-min">
+        <div class="display-middle">
+            <span class="xxxlarge text-white wide">PORTFOLIO</span>
+        </div>
+    </div>
+
+    <!-- Container (Portfolio Section) -->
+    <div class="content container padding-64" id="portfolio">
+        <h3 class="center">MY WORK</h3>
+        <br>
+        <p class="center">
+            <p class="center"> I have job experience in the fields of Web development, ERP development and UI development. </p>
+            <p class="center"> In each of those topics I read into existing code, built features, fixed bugs and refactored code. </p>
+            <p class="center"> Over the past year I spent a good portion of my free time to get into machine learning and computer vision and after some months I started to have decent success in multiple <a href="https://www.kaggle.com/dollofcuty/competitions/">Kaggle Competitions</a>                with very different datasets. </p>
+            <br>
+            <p class="hide-small center"> This website is a little project combining my web development skills with Python computer vision models I've trained. </p>
+            <p class="hide-small center"> You can refer to this <a href="https://github.com/DollofCuty/deep-learning-webapp/">github repo</a> for more information, an installation guide and the code. </p>
+            <p class="hide-small center"> The image classifier uses a <a href="{{ link }}">{{  name  }}</a> deep-learning model written with the
+                <a href="{{ library_link }}">{{  nnet_library  }}</a> library and the object detection is done with an
+                <a href="https://arxiv.org/pdf/1708.02002.pdf/">RetinaNet and Focal Loss</a> implementation, both trained on <a href="http://www.image-net.org/">image-net</a>!</em>
+            </p>
+            <br>
+            <p> Here are some random screenshots of what I do:</p>
+        </p>
+        <br>
+        <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
+        <div class="row-padding center">
+            <div class="col m3">
+                <img src="/static/images/work1.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="Training state of the art Machine Learning Models">
+            </div>
+
+            <div class="col m3">
+                <img src="/static/images/work2.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="writing code for Kaggle Competitions">
+            </div>
+
+            <div class="col m3">
+                <img src="/static/images/work3.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="visualizing/interpreting datasets">
+            </div>
+
+            <div class="col m3">
+                <img src="/static/images/work4.png" style="width:100%" onclick="onClick(this)" class="hover-opacity" alt="Experiments with deep-learning">
+            </div>
+        </div>
+
+        <div class="row-padding center section hide-small">
+            <a href="{{ url_for('cv.show') }}" class="button padding-large margin-top-huge margin-right-large light-grey">
+                <i class="fas fa-portrait fb margin-right"></i>SHOW CV
+            </a>
+            <a href="https://github.com/DollofCuty" class="button padding-large margin-top-huge light-grey">
+                <i class="fab fa-github fb margin-right"></i>GITHUB
+            </a>
+        </div>
+
+        <div class="row-padding center section hide-medium hide-large">
+            <a href="{{ url_for('cv.show') }}" class="button padding-large margin-top-huge margin-right light-grey">
+                <i class="fas fa-portrait fb margin-right"></i>SHOW CV
+            </a>
+            <a href="https://github.com/DollofCuty/deep-learning-webapp" class="button padding-large margin-top-huge light-grey">
+                <i class="fab fa-github fb margin-right"></i>GITHUB
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal for full size images on click-->
+    <div id="modal01" class="modal black" onclick="this.style.display='none'">
+        <span class="button large black display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
+        <div class="modal-content animate-zoom center transparent padding-64">
+            <img id="img01" class="image">
+            <p id="caption" class="opacity large"></p>
+        </div>
+    </div>
+
+    <!-- Third Parallax Image with Portfolio Text -->
+    <div class="bgimg-3 display-container opacity-min">
+        <div class="display-middle">
+            <span class="xxxlarge text-white wide">CONTACT</span>
+        </div>
+    </div>
+
+    <!-- Container (Contact Section) -->
+    <div class="content container padding-64" id="contact">
+        <h3 class="center">CONTACT ME</h3>
+        <p class="center"><em>I'd like to hear from you!</em></p>
+        <p class="center"><em>.. I'm also looking for work/projects</em></p>
+
+        <div class="row padding-32 section">
+            <div class="large margin-bottom">
+                <i class="fa fa-map-marker fa-fw hover-text-black xlarge margin-right"></i> Wiener Neustadt, Austria<br>
+                <i class="fa fa-envelope fa-fw hover-text-black xlarge margin-right"></i> Email: {{ mail }}<br>
+            </div>
+            <p>Write me an e-mail or leave me a note:</p>
+
+            {% from "_formhelpers.html" import render_field %}
+            <form action="{{ url_for('send_message', _anchor='contact') }}" method="POST">
+                <dl>
+                    <div class="col-mobile">
+                        {{ render_field(form.name, class='input border', placeholder="Name") }}
+                    </div>
+                    <div class="col-mobile">
+                        {{ render_field(form.email_field, class="input border", placeholder="Email Address") }}
+                    </div>
+                    <div class="row">
+                        <div class="margin-top">
+                            {{ render_field(form.message, class="input border", placeholder="Message") }}
+                        </div>
+                    </div>
+                </dl>
+                <div class="row">
+                    <div class="col-mobile center padding-large">
+                        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+                        <div class="message_flash {{ category }} padding-large">{{ message }}</div>
+                        {% endfor %} {% endif %} {% endwith %}
+                    </div>
+                    <div class="col-mobile center padding-large">
+                        <button class="button black right section" type="submit">
               <i class="fa fa-paper-plane"></i> SEND MESSAGE
             </button>
-          </div>
+                    </div>
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer class="center black padding-32 opacity hover-opacity-decrease">
-    <a href="#home" class="button light-grey"><i class="fa fa-arrow-up margin-right"></i>To the top</a>
-    <p>{{  mail  }}</p>
-    <a href="https://github.com/DollofCuty" class="button light-grey"><i class="fab fa-github fb"></i></a>
-    <a href="https://www.xing.com/profile/Christian_Unterrainer3/" class="button light-grey"><i class="fab fa-xing fb"></i></a>
-    <a href="https://angel.co/christian-unterrainer" class="button light-grey"><i class="fab fa-angellist fb"></i></a>
-    <a href="https://www.kaggle.com/dollofcuty" class="button light-grey"><i class="fab fa-kaggle fb"></i></a>
-  </footer>
-  
-  <script>
-    // setTimeout() function will be fired after page is loaded
-    // it will wait for 5 sec. and then will fire
-    // $(".message_flash").hide() function
-    $(document).ready(function() {
-      setTimeout(function() {
-        $(".message_flash").animate({ opacity: 0 })
-      }, 5000);
-    })   
+    <!-- Footer -->
+    <footer class="center black padding-32 opacity hover-opacity-decrease">
+        <a href="#home" class="button light-grey"><i class="fa fa-arrow-up margin-right"></i>To the top</a>
+        <p>{{ mail }}</p>
+        <a href="https://github.com/DollofCuty" class="button light-grey"><i class="fab fa-github fb"></i></a>
+        <a href="https://www.xing.com/profile/Christian_Unterrainer3/" class="button light-grey"><i class="fab fa-xing fb"></i></a>
+        <a href="https://angel.co/christian-unterrainer" class="button light-grey"><i class="fab fa-angellist fb"></i></a>
+        <a href="https://www.kaggle.com/dollofcuty" class="button light-grey"><i class="fab fa-kaggle fb"></i></a>
+    </footer>
 
-    $(document).ready(function() {
-      $('#contactForm').submit(function () {
-        sendContactForm();
-        return false;
-      });
-    })
+    <script>
+        // setTimeout() function will be fired after page is loaded
+        // it will wait for 5 sec. and then will fire
+        // $(".message_flash").hide() function
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".message_flash").animate({
+                    opacity: 0
+                })
+            }, 5000);
+        })
 
-    // Modal Image Gallery
-    function onClick(element) {
-      document.getElementById("img01").src = element.src;
-      document.getElementById("modal01").style.display = "block";
-      var captionText = document.getElementById("caption");
-      captionText.innerHTML = element.alt;
-    }
-  </script>
+        $(document).ready(function() {
+            $('#contactForm').submit(function() {
+                sendContactForm();
+                return false;
+            });
+        })
 
-  {% endblock %}
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
+    </script>
+
+    {% endblock %}
 </body>
+
 </html>

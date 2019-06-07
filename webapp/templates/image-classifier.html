@@ -1,74 +1,83 @@
 <!DOCTYPE html>
 <html>
- <body>
-    {% extends "template.html" %}
-    {% block content %}
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141674173-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-141674173-1');
+    </script>
+</head>
+
+<body>
+    {% extends "template.html" %} {% block content %}
 
     <div class="content container padding-32">
-      <h3 class="center">IMAGE CLASSIFIER</h3>
+        <h3 class="center">IMAGE CLASSIFIER</h3>
 
-      {% if not filename %} 
-      
-      <p class="center hide-small"><em>Choose an image to run inference of a       
+        {% if not filename %}
+
+        <p class="center hide-small"><em>Choose an image to run inference of a       
       <a href="{{ link }}">{{  name  }}</a> model trained on <a href="http://www.image-net.org/">image-net</a>!</em></p>
-      <p class="center hide-medium hide-large"><em>Choose an image to run the model!</em></p>
+        <p class="center hide-medium hide-large"><em>Choose an image to run the model!</em></p>
 
-      <form class="center" action="{{ url_for('upload.upload_file', reason='image-classifier') }}" method="POST" enctype=multipart/form-data>
-        <p><input type=file name=file style="width: 250px;">
-           <input type=submit> 
-      </form>
+        <form class="center" action="{{ url_for('upload.upload_file', reason='image-classifier') }}" method="POST" enctype=multipart/form-data>
+            <p><input type=file name=file style="width: 250px;">
+                <input type=submit>
+        </form>
 
-      {% else %} <!-- if filename-->
+        {% else %}
+        <!-- if filename-->
 
-      {% if prediction %} 
-    
-      <p class="center"><em>Results</em></p>
+        {% if prediction %}
 
-      <div class="center padding-small hide-small">
-        <h3>{{prediction[0]}} with {{confidence[0]}}% confidence</h3>
-        <h4>{{prediction[1]}} with {{confidence[1]}}% confidence</h4>
-        <h4>{{prediction[2]}} with {{confidence[2]}}% confidence</h4>
-      </div>
-      <div class="center hide-medium hide-large">
-        <h4>{{prediction[0]}}: {{confidence[0]}}%</h4>
-        <h5>{{prediction[1]}}: {{confidence[1]}}%</h5>
-      </div>
+        <p class="center"><em>Results</em></p>
 
-      {% else %} 
+        <div class="center padding-small hide-small">
+            <h3>{{prediction[0]}} with {{confidence[0]}}% confidence</h3>
+            <h4>{{prediction[1]}} with {{confidence[1]}}% confidence</h4>
+            <h4>{{prediction[2]}} with {{confidence[2]}}% confidence</h4>
+        </div>
+        <div class="center hide-medium hide-large">
+            <h4>{{prediction[0]}}: {{confidence[0]}}%</h4>
+            <h5>{{prediction[1]}}: {{confidence[1]}}%</h5>
+        </div>
 
-      <p class="center"><em>This will take 5-10 seconds!</em></p>
+        {% else %}
 
-      <div class="center padding-16 hide-small">
-        <a href="{{ url_for('image_classifier.analyze', filename=filename) }}" 
-        class="button center padding-large black xlarge wide animate-opacity" onclick="$(this).closest('div').remove();">ANALYZE</a>
-      </div>
+        <p class="center"><em>This will take 5-10 seconds!</em></p>
 
-      <div class="center padding-small hide-medium hide-large">
-        <a href="{{ url_for('image_classifier.analyze', filename=filename) }}" 
-        class="button center padding-medium black small wide animate-opacity" onclick="$(this).closest('div').remove();">ANALYZE</a>
-      </div>
+        <div class="center padding-16 hide-small">
+            <a href="{{ url_for('image_classifier.analyze', filename=filename) }}" class="button center padding-large black xlarge wide animate-opacity" onclick="$(this).closest('div').remove();">ANALYZE</a>
+        </div>
 
-      {% endif %}
+        <div class="center padding-small hide-medium hide-large">
+            <a href="{{ url_for('image_classifier.analyze', filename=filename) }}" class="button center padding-medium black small wide animate-opacity" onclick="$(this).closest('div').remove();">ANALYZE</a>
+        </div>
 
-      <div class="center hide-small">
-        <img src="{{ url_for('upload.send_file', reason='image-classifier', filename=filename) }}" class="image" style="max-height:300px">
-      </div>
+        {% endif %}
 
-      <div class="center hide-medium hide-large">
-        <img src="{{ url_for('upload.send_file', reason='image-classifier', filename=filename) }}" class="image" style="max-height:250px">
-      </div>
-      {% endif %}
+        <div class="center hide-small">
+            <img src="{{ url_for('upload.send_file', reason='image-classifier', filename=filename) }}" class="image" style="max-height:300px">
+        </div>
 
-      {% if prediction %}
+        <div class="center hide-medium hide-large">
+            <img src="{{ url_for('upload.send_file', reason='image-classifier', filename=filename) }}" class="image" style="max-height:250px">
+        </div>
+        {% endif %} {% if prediction %}
 
-      <div class="center padding-16 hide-small">
-        <a href="{{ url_for('image_classifier.show', filename=filename) }}" 
-        class="button center padding-large black xlarge wide animate-opacity">TRY ANOTHER</a>
-      </div>
+        <div class="center padding-16 hide-small">
+            <a href="{{ url_for('image_classifier.show', filename=filename) }}" class="button center padding-large black xlarge wide animate-opacity">TRY ANOTHER</a>
+        </div>
 
-      <div class="center padding-small hide-medium hide-large">
-        <a href="{{ url_for('image_classifier.show', filename=filename) }}" 
-        class="button center padding-medium black small wide animate-opacity"">TRY ANOTHER</a>
+        <div class="center padding-small hide-medium hide-large">
+            <a href="{{ url_for('image_classifier.show', filename=filename) }}" class="button center padding-medium black small wide animate-opacity" ">TRY ANOTHER</a>
       </div>
 
       {% endif %}
@@ -77,18 +86,18 @@
   </body>
 
   <!-- Footer -->
-  <footer class="footer black padding-16 opacity hover-opacity-decrease center hide-small">
-    <a href="{{ url_for('home') }}" class="button light-grey margin-top"><i class="fas fa-arrow-left margin-right"></i>Back to the Website</a>
+  <footer class="footer black padding-16 opacity hover-opacity-decrease center hide-small ">
+    <a href="{{ url_for( 'home') }} " class="button light-grey margin-top "><i class="fas fa-arrow-left margin-right "></i>Back to the Website</a>
     <p>{{  mail  }}</p>
-    <a href="https://github.com/DollofCuty" class="button light-grey"><i class="fab fa-github fb"></i></a>
-    <a href="https://www.xing.com/profile/Christian_Unterrainer3/" class="button light-grey"><i class="fab fa-xing fb"></i></a>
-    <a href="https://angel.co/christian-unterrainer" class="button light-grey"><i class="fab fa-angellist fb"></i></a>
-    <a href="https://www.kaggle.com/dollofcuty" class="button light-grey"><i class="fab fa-kaggle fb"></i></a>
+    <a href="https://github.com/DollofCuty " class="button light-grey "><i class="fab fa-github fb "></i></a>
+    <a href="https://www.xing.com/profile/Christian_Unterrainer3/ " class="button light-grey "><i class="fab fa-xing fb "></i></a>
+    <a href="https://angel.co/christian-unterrainer " class="button light-grey "><i class="fab fa-angellist fb "></i></a>
+    <a href="https://www.kaggle.com/dollofcuty " class="button light-grey "><i class="fab fa-kaggle fb "></i></a>
   </footer>
   
   <!-- Footer mobile -->
-  <footer class="footer black opacity hover-opacity-decrease center hide-medium hide-large">
-    <a href="{{ url_for('home') }}" class="button light-grey margin-top"><i class="fas fa-arrow-left margin-right"></i>Back to the Website</a>
+  <footer class="footer black opacity hover-opacity-decrease center hide-medium hide-large ">
+    <a href="{{ url_for( 'home') }} " class="button light-grey margin-top "><i class="fas fa-arrow-left margin-right "></i>Back to the Website</a>
     <p>{{  mail  }}</p>
   </footer>
   {% endblock %}
