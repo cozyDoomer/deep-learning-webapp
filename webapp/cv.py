@@ -7,13 +7,12 @@ cv = Blueprint('cv', __name__)
 
 app = Flask(__name__)
 
-@cv.route("/cv")
 
+@cv.route("/cv")
 def show():
     return render_template("cv.html", mail=current_app.config['MAIL_USERNAME'])
 
 
 @cv.route("/cv/download/")
-
 def download():
     return send_file('static/documents/cv.pdf', as_attachment=True)

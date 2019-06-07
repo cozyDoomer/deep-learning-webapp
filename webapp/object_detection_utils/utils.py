@@ -116,7 +116,8 @@ def add_bb_into_image(image, bb, color=(255, 0, 0), thickness=2, label=None):
         r_Yin = y1 - th - int(thickness / 2)
         # Draw filled rectangle to put the text in it
         cv2.rectangle(image, (r_Xin, r_Yin - thickness),
-                      (r_Xin + tw + thickness * 3, r_Yin + th + int(12.5 * fontScale)), (b, g, r),
+                      (r_Xin + tw + thickness * 3, r_Yin +
+                       th + int(12.5 * fontScale)), (b, g, r),
                       -1)
         cv2.putText(image, label, (xin_bb, yin_bb), font, fontScale, (0, 0, 0), fontThickness,
                     cv2.LINE_AA)

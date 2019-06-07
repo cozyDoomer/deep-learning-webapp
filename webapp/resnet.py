@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.utils.model_zoo as model_zoo
 
 
-__all__ = ['ResNet','resnet50', 'resnet152']
+__all__ = ['ResNet', 'resnet50', 'resnet152']
 
 
 pretrained_settings = {
@@ -26,6 +26,7 @@ pretrained_settings = {
         'num_classes': 1000
     }
 }
+
 
 def conv3x3(in_planes, out_planes, stride=1, groups=1):
     """3x3 convolution with padding"""
@@ -130,16 +131,21 @@ class ResNet(nn.Module):
         self.bn1 = norm_layer(planes[0])
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
-        self.layer1 = self._make_layer(block, planes[0], layers[0], groups=groups, norm_layer=norm_layer)
-        self.layer2 = self._make_layer(block, planes[1], layers[1], stride=2, groups=groups, norm_layer=norm_layer)
-        self.layer3 = self._make_layer(block, planes[2], layers[2], stride=2, groups=groups, norm_layer=norm_layer)
-        self.layer4 = self._make_layer(block, planes[3], layers[3], stride=2, groups=groups, norm_layer=norm_layer)
+        self.layer1 = self._make_layer(
+            block, planes[0], layers[0], groups=groups, norm_layer=norm_layer)
+        self.layer2 = self._make_layer(
+            block, planes[1], layers[1], stride=2, groups=groups, norm_layer=norm_layer)
+        self.layer3 = self._make_layer(
+            block, planes[2], layers[2], stride=2, groups=groups, norm_layer=norm_layer)
+        self.layer4 = self._make_layer(
+            block, planes[3], layers[3], stride=2, groups=groups, norm_layer=norm_layer)
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc = nn.Linear(planes[3] * block.expansion, num_classes)
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
-                nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
+                nn.init.kaiming_normal_(
+                    m.weight, mode='fan_out', nonlinearity='relu')
             elif isinstance(m, (nn.BatchNorm2d, nn.GroupNorm)):
                 nn.init.constant_(m.weight, 1)
                 nn.init.constant_(m.bias, 0)
@@ -165,10 +171,12 @@ class ResNet(nn.Module):
             )
 
         layers = []
-        layers.append(block(self.inplanes, planes, stride, downsample, groups, norm_layer))
+        layers.append(block(self.inplanes, planes, stride,
+                            downsample, groups, norm_layer))
         self.inplanes = planes * block.expansion
         for _ in range(1, blocks):
-            layers.append(block(self.inplanes, planes, groups=groups, norm_layer=norm_layer))
+            layers.append(block(self.inplanes, planes,
+                                groups=groups, norm_layer=norm_layer))
 
         return nn.Sequential(*layers)
 
@@ -189,6 +197,7 @@ class ResNet(nn.Module):
 
         return x
 
+
 def resnet50(pretrained=False, **kwargs):
     """Constructs a ResNet-50 model.
 
@@ -196,10 +205,11 @@ def resnet50(pretrained=False, **kwargs):
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
     settings = pretrained_settings['resnet50']
-    model = ResNet(Bottleneck, [3, 4, 6, 3], num_classes=settings['num_classes'], **kwargs)
+    model = ResNet(Bottleneck, [3, 4, 6, 3],
+                   num_classes=settings['num_classes'], **kwargs)
     if pretrained:
         model.load_state_dict(torch.load(settings['path']))
-    
+
     model.input_space = settings['input_space']
     model.input_size = settings['input_size']
     model.input_range = settings['input_range']
@@ -208,6 +218,7 @@ def resnet50(pretrained=False, **kwargs):
     model.std = settings['std']
     return model
 
+
 def resnet152(pretrained=False, **kwargs):
     """Constructs a ResNet-152 model.
 
@@ -215,10 +226,11 @@ def resnet152(pretrained=False, **kwargs):
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
     settings = pretrained_settings['resnet152']
-    model = ResNet(Bottleneck, [3, 8, 36, 3], num_classes=settings['num_classes'], **kwargs)
+    model = ResNet(Bottleneck, [3, 8, 36, 3],
+                   num_classes=settings['num_classes'], **kwargs)
     if pretrained:
         model.load_state_dict(torch.load(settings['path']))
-    
+
     model.input_space = settings['input_space']
     model.input_size = settings['input_size']
     model.input_range = settings['input_range']

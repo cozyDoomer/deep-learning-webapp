@@ -13,8 +13,10 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 def preprocess_image(filepath, min_size=299):
     img = Image.open(filepath)
@@ -35,25 +37,27 @@ def preprocess_image(filepath, min_size=299):
             elif orientation == 4:
                 img = img.rotate(180).transpose(Image.FLIP_LEFT_RIGHT)
             elif orientation == 5:
-                img = img.rotate(-90, expand=True).transpose(Image.FLIP_LEFT_RIGHT)
+                img = img.rotate(-90,
+                                 expand=True).transpose(Image.FLIP_LEFT_RIGHT)
             elif orientation == 6:
                 img = img.rotate(-90, expand=True)
             elif orientation == 7:
-                img = img.rotate(90, expand=True).transpose(Image.FLIP_LEFT_RIGHT)
+                img = img.rotate(90, expand=True).transpose(
+                    Image.FLIP_LEFT_RIGHT)
             elif orientation == 8:
                 img = img.rotate(90, expand=True)
 
     # resize image to min_size (keep aspect ratio)
     ratio = max(min_size/img.width, min_size/img.height)
     img.thumbnail((img.width * ratio, img.height * ratio), Image.ANTIALIAS)
-    
+
     print(f'resized image: {img.size}')
     if exif_bytes:
         img.save(filepath, exif=exif_bytes)
     img.save(filepath)
-    
-@upload.route('/upload/<reason>', methods=['POST', 'GET'])
 
+
+@upload.route('/upload/<reason>', methods=['POST', 'GET'])
 def upload_file(reason):
     if request.method == 'POST':
         # check if the post request has the file part
@@ -68,19 +72,20 @@ def upload_file(reason):
         # check if file extension is in ALLOWED_EXTENSIONS
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            filepath = os.path.join(
+                current_app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
             size = 299
-            if reason=='object-detection':
+            if reason == 'object-detection':
                 size = 500
             preprocess_image(filepath, min_size=size)
             return render_template(f'{reason}.html', filename=filename, mail=current_app.config['MAIL_USERNAME'])
 
     return render_template(f'{reason}.html', error='error', mail=current_app.config['MAIL_USERNAME'])
 
-@upload.route('/upload/<reason>/<filename>', methods=['GET'])
 
+@upload.route('/upload/<reason>/<filename>', methods=['GET'])
 def send_file(reason, filename):
-    if request.method=='GET':
+    if request.method == 'GET':
         return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
     return render_template(f'{reason}.html', error='error', mail=current_app.config['MAIL_USERNAME'])

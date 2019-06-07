@@ -4,6 +4,7 @@ from torch.autograd import Variable
 
 from object_detection_utils.object_detection_helper import *
 
+
 class RetinaNetFocalLoss(nn.Module):
 
     def __init__(self, anchors: Collection[float], gamma: float = 2., alpha: float = 0.25, pad_idx: int = 0,
@@ -21,9 +22,11 @@ class RetinaNetFocalLoss(nn.Module):
         encoded_tgt = encode_class(clas_tgt, clas_pred.size(1))
         ps = torch.sigmoid(clas_pred)
         weights = Variable(encoded_tgt * (1 - ps) + (1 - encoded_tgt) * ps)
-        alphas = (1 - encoded_tgt) * self.alpha + encoded_tgt * (1 - self.alpha)
+        alphas = (1 - encoded_tgt) * self.alpha + \
+            encoded_tgt * (1 - self.alpha)
         weights.pow_(self.gamma).mul_(alphas)
-        clas_loss = F.binary_cross_entropy_with_logits(clas_pred, encoded_tgt, weights, reduction='sum')
+        clas_loss = F.binary_cross_entropy_with_logits(
+            clas_pred, encoded_tgt, weights, reduction='sum')
         return clas_loss
 
     def _one_loss(self, clas_pred, bbox_pred, clas_tgt, bbox_tgt):
@@ -33,7 +36,8 @@ class RetinaNetFocalLoss(nn.Module):
         if bbox_mask.sum() != 0:
             bbox_pred = bbox_pred[bbox_mask]
             bbox_tgt = bbox_tgt[matches[bbox_mask]]
-            bb_loss = self.reg_loss(bbox_pred, bbox_to_activ(bbox_tgt, self.anchors[bbox_mask]))
+            bb_loss = self.reg_loss(bbox_pred, bbox_to_activ(
+                bbox_tgt, self.anchors[bbox_mask]))
         else:
             bb_loss = 0.
         matches.add_(1)
@@ -57,12 +61,15 @@ class RetinaNetFocalLoss(nn.Module):
             bb_loss += bb
             focal_loss += focal
 
-        self.metrics = dict(zip(self.metric_names, [bb_loss / clas_tgts.size(0), focal_loss / clas_tgts.size(0)]))
+        self.metrics = dict(zip(self.metric_names, [
+                            bb_loss / clas_tgts.size(0), focal_loss / clas_tgts.size(0)]))
         return (bb_loss+focal_loss) / clas_tgts.size(0)
+
 
 class SigmaL1SmoothLoss(nn.Module):
 
     def forward(self, output, target):
         reg_diff = torch.abs(target - output)
-        reg_loss = torch.where(torch.le(reg_diff, 1/9), 4.5 * torch.pow(reg_diff, 2), reg_diff - 1/18)
+        reg_loss = torch.where(torch.le(reg_diff, 1/9),
+                               4.5 * torch.pow(reg_diff, 2), reg_diff - 1/18)
         return reg_loss.mean()

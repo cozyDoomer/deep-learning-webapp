@@ -1,6 +1,8 @@
 #!/venv/bin python
 
-import os, sys, logging
+import os
+import sys
+import logging
 from flask import Flask, render_template, current_app, request, flash
 from flask_mail import Mail, Message
 from forms import EmailForm
@@ -9,7 +11,7 @@ from fastai_object_detection import object_detection
 from upload import upload
 from cv import cv
 
-# import classifier depending on environment variable set in Dockerfile 
+# import classifier depending on environment variable set in Dockerfile
 model_name = os.getenv('NNET', 'resnet50')
 nnet_library = os.getenv('CLASSIFICATIONLIBRARY', 'fastai')
 
@@ -26,30 +28,31 @@ app.register_blueprint(image_classifier)
 app.register_blueprint(object_detection)
 
 model_links = {
-  'pnasnet5': 'https://arxiv.org/pdf/1712.00559.pdf',
-  'resnet152': 'https://arxiv.org/pdf/1512.03385.pdf',
-  'resnet50': 'https://arxiv.org/pdf/1512.03385.pdf',
-  'inceptionresnetv2': 'https://arxiv.org/pdf/1602.07261.pdf'
+    'pnasnet5': 'https://arxiv.org/pdf/1712.00559.pdf',
+    'resnet152': 'https://arxiv.org/pdf/1512.03385.pdf',
+    'resnet50': 'https://arxiv.org/pdf/1512.03385.pdf',
+    'inceptionresnetv2': 'https://arxiv.org/pdf/1602.07261.pdf'
 }
 
 library_links = {
-  'fastai': 'https://github.com/fastai/fastai',
-  'pytorch': 'https://github.com/pytorch/pytorch'
+    'fastai': 'https://github.com/fastai/fastai',
+    'pytorch': 'https://github.com/pytorch/pytorch'
 }
 
 with app.app_context():
-    #initialize email configuration
+    # initialize email configuration
     app.config.from_object('email_conf.Config')
 
     UPLOAD_FOLDER = './static/uploaded'
     IMAGENET_FOLDER = './static/imagenet'
 
-    current_app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
+    current_app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     current_app.config['IMAGENET_FOLDER'] = IMAGENET_FOLDER
     current_app.config['MAIL_USERNAME'] = app.config['MAIL_USERNAME']
 
     # initialize model depending on env. variable set in dockerfile
     model_name = os.getenv('NNET', 'resnet50')
+
 
 def install_secret_key(app, filename='secret_key'):
     '''Configure the SECRET_KEY from a file
@@ -73,31 +76,30 @@ def install_secret_key(app, filename='secret_key'):
 
 
 @app.route('/')
-
 def home():
     form = EmailForm(request.form)
-    return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], nnet_library=nnet_library, 
-                            library_link=library_links[nnet_library], name=model_name, link=model_links[model_name])
+    return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], nnet_library=nnet_library,
+                           library_link=library_links[nnet_library], name=model_name, link=model_links[model_name])
+
 
 @app.route('/message', methods=['POST'])
-
 def send_message():
     form = EmailForm(request.form)
     if form.validate():
         app.config.from_object('email_conf.Config')
         mail = Mail(app)
-        msg = Message(sender = current_app.config['MAIL_USERNAME'], recipients = [current_app.config['MAIL_USERNAME']], 
-                      subject = f'message from {form.name.data} through website')
+        msg = Message(sender=current_app.config['MAIL_USERNAME'], recipients=[current_app.config['MAIL_USERNAME']],
+                      subject=f'message from {form.name.data} through website')
         mail.body = form.message.data
         msg.html = f'{form.email_field.data}<br>{mail.body}'
         mail.send(msg)
         flash('Message sent', 'success')
-        return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], nnet_library=nnet_library, 
+        return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], nnet_library=nnet_library,
                                library_link=library_links[nnet_library], name=model_name, link=model_links[model_name])
-    
+
     flash('There was an error sending the message', 'error')
-    return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], nnet_library=nnet_library, 
-                            library_link=library_links[nnet_library], name=model_name, link=model_links[model_name])
+    return render_template('home.html', form=form, mail=current_app.config['MAIL_USERNAME'], nnet_library=nnet_library,
+                           library_link=library_links[nnet_library], name=model_name, link=model_links[model_name])
 
 
 install_secret_key(app)

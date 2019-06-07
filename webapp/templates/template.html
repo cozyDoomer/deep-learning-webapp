@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
- <head>
+
+<head>
     <title>Christian's site</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="#" />
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.8.5/jquery-ui.min.js" integrity="sha256-fOse6WapxTrUSJOJICXXYwHRJOPa6C1OUQXi7C9Ddy8=" crossorigin="anonymous"></script>
- </head>
- <body>
- 
+</head>
+
+<body>
+
     <!-- Navbar (sit on top) -->
     <div class="top">
         <div class="bar card animate-top white" id="myNavbar">
@@ -29,33 +30,33 @@
             <a href="{{ url_for('image_classifier.show') }}" class="bar-item button hide-small"><i class="fas fa-laptop-code"></i> CLASSIFIER</a>
             <a href="{{ url_for('object_detection.show') }}" class="bar-item button hide-small"><i class="fas fa-object-group"></i> OBJECT DETECTION</a>
         </div>
-    
+
         <!-- Navbar on small screens -->
         <div id="navDemo" class="bar-block white hide hide-large hide-medium">
             <a href="{{ url_for('home') }}#about" class="bar-item button" onclick="toggleFunction()">ABOUT</a>
             <a href="{{ url_for('home') }}#portfolio" class="bar-item button" onclick="toggleFunction()">PORTFOLIO</a>
             <a href="{{ url_for('home') }}#contact" class="bar-item button" onclick="toggleFunction()">CONTACT</a>
-            <hr class="divider" >
-            <a href="{{ url_for('cv.show') }}"  class="bar-item button" onclick="toggleFunction()">CV</a>
+            <hr class="divider">
+            <a href="{{ url_for('cv.show') }}" class="bar-item button" onclick="toggleFunction()">CV</a>
             <a href="{{ url_for('image_classifier.show') }}" class="bar-item button" onclick="toggleFunction()">CLASSIFIER</a>
             <a href="{{ url_for('object_detection.show') }}" class="bar-item button" onclick="toggleFunction()">OBJECT DETECTION</a>
-            <hr class="divider" >
+            <hr class="divider">
         </div>
     </div>
 
     <script>
-    // Used to toggle the menu on small screens when clicking on the menu button
-    function toggleFunction() {
-        var x = document.getElementById("navDemo");
-        if (x.className.indexOf("show") == -1) {
-            x.className += " show";
-        } else {
-            x.className = x.className.replace(" show", "");
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function toggleFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("show") == -1) {
+                x.className += " show";
+            } else {
+                x.className = x.className.replace(" show", "");
+            }
         }
-    }
     </script>
 
-    {% block content %}
-    {% endblock %}
- </body>
+    {% block content %} {% endblock %}
+</body>
+
 </html>

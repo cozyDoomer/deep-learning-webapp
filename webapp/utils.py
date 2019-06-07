@@ -6,6 +6,7 @@ import torchvision.transforms as transforms
 from PIL import Image
 from munch import munchify
 
+
 class ToSpaceBGR(object):
 
     def __init__(self, is_bgr):
@@ -52,7 +53,8 @@ class TransformImage(object):
 
         tfs = []
         if preserve_aspect_ratio:
-            tfs.append(transforms.Resize(int(math.floor(max(self.input_size)/self.scale))))
+            tfs.append(transforms.Resize(
+                int(math.floor(max(self.input_size)/self.scale))))
         else:
             height = int(self.input_size[1] / self.scale)
             width = int(self.input_size[2] / self.scale)
@@ -70,8 +72,8 @@ class TransformImage(object):
             tfs.append(transforms.RandomVerticalFlip())
 
         tfs.append(transforms.ToTensor())
-        tfs.append(ToSpaceBGR(self.input_space=='BGR'))
-        tfs.append(ToRange255(max(self.input_range)==255))
+        tfs.append(ToSpaceBGR(self.input_space == 'BGR'))
+        tfs.append(ToRange255(max(self.input_range) == 255))
         tfs.append(transforms.Normalize(mean=self.mean, std=self.std))
 
         self.tf = transforms.Compose(tfs)

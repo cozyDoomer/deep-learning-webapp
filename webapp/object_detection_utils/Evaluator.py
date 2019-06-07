@@ -39,7 +39,8 @@ class Evaluator:
             dict['total TP']: total number of True Positive detections;
             dict['total FP']: total number of False Negative detections;
         """
-        ret = []  # list containing metrics (precision, recall, average precision) of each class
+        ret = [
+        ]  # list containing metrics (precision, recall, average precision) of each class
         # List with all ground truths (Ex: [imageName,class,confidence=1, (bb coordinates XYX2Y2)])
         groundTruths = []
         # List with all detections (Ex: [imageName,class,confidence,(bb coordinates XYX2Y2)])
@@ -117,9 +118,11 @@ class Evaluator:
             prec = np.divide(acc_TP, (acc_FP + acc_TP))
             # Depending on the method, call the right implementation
             if method == MethodAveragePrecision.EveryPointInterpolation:
-                [ap, mpre, mrec, ii] = Evaluator.CalculateAveragePrecision(rec, prec)
+                [ap, mpre, mrec, ii] = Evaluator.CalculateAveragePrecision(
+                    rec, prec)
             else:
-                [ap, mpre, mrec, _] = Evaluator.ElevenPointInterpolatedAP(rec, prec)
+                [ap, mpre, mrec, _] = Evaluator.ElevenPointInterpolatedAP(
+                    rec, prec)
             # add class result in the dictionary to be returned
             r = {
                 'class': c,
@@ -194,7 +197,8 @@ class Evaluator:
             plt.close()
             if showInterpolatedPrecision:
                 if method == MethodAveragePrecision.EveryPointInterpolation:
-                    plt.plot(mrec, mpre, '--r', label='Interpolated precision (every point)')
+                    plt.plot(mrec, mpre, '--r',
+                             label='Interpolated precision (every point)')
                 elif method == MethodAveragePrecision.ElevenPointInterpolation:
                     # Uncomment the line below if you want to plot the area
                     # plt.plot(mrec, mpre, 'or', label='11-point interpolated precision')
@@ -207,16 +211,19 @@ class Evaluator:
                             idxEq = np.argwhere(mrec == r)
                             nrec.append(r)
                             nprec.append(max([mpre[int(id)] for id in idxEq]))
-                    plt.plot(nrec, nprec, 'or', label='11-point interpolated precision')
+                    plt.plot(nrec, nprec, 'or',
+                             label='11-point interpolated precision')
             plt.plot(recall, precision, label='Precision')
             plt.xlabel('recall')
             plt.ylabel('precision')
             if showAP:
                 ap_str = "{0:.2f}%".format(average_precision * 100)
                 # ap_str = "{0:.4f}%".format(average_precision * 100)
-                plt.title('Precision x Recall curve \nClass: %s, AP: %s' % (str(classId), ap_str))
+                plt.title('Precision x Recall curve \nClass: %s, AP: %s' %
+                          (str(classId), ap_str))
             else:
-                plt.title('Precision x Recall curve \nClass: %s' % str(classId))
+                plt.title('Precision x Recall curve \nClass: %s' %
+                          str(classId))
             plt.legend(shadow=True)
             plt.grid()
             ############################################################
@@ -366,7 +373,8 @@ class Evaluator:
         # cv2.imshow("comparing",img)
         # cv2.waitKey(0)
         # cv2.destroyWindow("comparing")
-        return sorted(ret, key=lambda i: i[0], reverse=True)  # sort by iou (from highest to lowest)
+        # sort by iou (from highest to lowest)
+        return sorted(ret, key=lambda i: i[0], reverse=True)
 
     @staticmethod
     def iou(boxA, boxB):
