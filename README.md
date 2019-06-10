@@ -116,7 +116,7 @@ python main.py
 
 # Details
 
-## personal website I use including a pytorch image-classifier
+## personal website I use including a pytorch/fastai image-classifier and fastai object detection model
 
 ## Frontend
 
@@ -136,6 +136,4 @@ acts as webserver accepting requests from Flask
 
 ## Docker 
 
-The Dockerfile builds some layers on top of the pytorch-cpu docker from [Deepo](https://github.com/ufoym/deepo) 
-
-The specific docker is: ufoym/deepo:pytorch-py36-cpu
+The Dockerfile builds some layers on top of the python:3.6.8-slim docker from [Python](https://hub.docker.com/_/python) 
