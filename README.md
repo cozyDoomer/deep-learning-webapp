@@ -1,4 +1,4 @@
-# personal image-classifier webapp
+# personal computer vision webapp
 
 ## Getting Started
 
@@ -6,7 +6,7 @@ It would be a good idea to fork the repository because there is a lot of persona
 
 things that would need to be changed for your own website: 
 
-- change personal information in home.html and cv.html 
+- change personal information in home.html 
 
 - include Photos for the frontend 
 
