@@ -1,4 +1,4 @@
-# personal computer vision webapp
+# Portfolio computer vision webapp
 
 ## Getting Started
 
